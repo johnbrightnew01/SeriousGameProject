@@ -27,5 +27,12 @@ public class TimeLineController : MonoBehaviour
         timeLine.Play();
     }
 
+    public void StopPlayerAnimation()
+    {
+        Controller.self.playerController.playerView.PlayAnimation(PlayerView.PlayerDirection.right, PlayerView.PlayerAnimationType.idle);
+        Controller.self.gameController.DoStartShooting();
+    }
+
+
 
 }

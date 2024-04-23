@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using UnityEngine;
 
 public enum SceneList
@@ -13,7 +14,9 @@ public enum SceneList
 
 public class GameController : MonoBehaviour
 {
-    
+    public GameObject menuScene;
+    public GameObject gamePlayScene1;
+
     private void Awake()
     {
         OnInitial();
@@ -24,9 +27,16 @@ public class GameController : MonoBehaviour
         GlobalData.isGameOver = false;
         GlobalData.isInGameMenu = false;
         GlobalData.isLevelStart = false;
-
         GlobalData.isInGameMenu = true;
+   
     }
+
+    private IEnumerator Start()
+    {
+        yield return new WaitForSeconds(0.5f);
+        ShowIntroScene();
+    }
+
 
     public void OnGamePlayStart()
     {
@@ -52,8 +62,37 @@ public class GameController : MonoBehaviour
     {
         if(scn == SceneList.GamePlayScene1)
         {
+            UIController.Instance.ShowLoadingAnimation();
+            UIController.Instance.uiMenu.gameObject.SetActive(false);
+            UIController.Instance.uiGamePlay.gameObject.SetActive(true);
+            menuScene.SetActive(false);
+            gamePlayScene1.SetActive(true);
             Controller.self.timeLineController.OnStartScene(scn);
+            Controller.self.cameraController.DoActiveVirtualCamera(Controller.self.cameraController.playerCam, false);
         }
+    }
+
+    public void ShowIntroScene()
+    {
+        UIController.Instance.uiMenu.gameObject.SetActive(true);
+        UIController.Instance.uiGamePlay.gameObject.SetActive(false);
+        UIController.Instance.uiGameOver.gameObject.SetActive(false);
+
+        menuScene.gameObject.SetActive(true);
+        gamePlayScene1.gameObject.SetActive(false);
+        Controller.self.cameraController.DoActiveVirtualCamera(Controller.self.cameraController.menuCam, false);
+    }
+
+    public void DoStartShooting()
+    {
+        Invoke("MoveToTheShootingCamera", 1f);
+
+    }
+
+    private void MoveToTheShootingCamera() // call from event(Invoke)
+    {
+        Controller.self.cameraController.DoActiveVirtualCamera(Controller.self.cameraController.shootCam, true);
+        UIController.Instance.targetController.StartFight();
     }
    
 }
