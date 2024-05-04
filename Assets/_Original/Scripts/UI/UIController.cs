@@ -13,9 +13,12 @@ public class UIController : MonoBehaviour
     }
 
     public static UIController Instance;
-    public UIMenu uiMenu;
-    public UIGamePlay uiGamePlay;
-    public UIGameOver uiGameOver;
+    [SerializeField]
+    private UIMenu uiMenu;
+    [SerializeField]
+    private UIGamePlay uiGamePlay;
+    [SerializeField]
+    private UIGameOver uiGameOver;
     public Image loadingImage;
     public TargetController targetController;
 
@@ -40,6 +43,7 @@ public class UIController : MonoBehaviour
 
         }
     }
+
 
     public void ShowMenu(bool isAnimation, float animTime = 0.7f)
     {

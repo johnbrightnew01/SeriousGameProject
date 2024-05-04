@@ -7,7 +7,8 @@ public class PlayerController : MonoBehaviour
 
     [HideInInspector]
     public float timeCounter;
-    public PlayerView playerView;
+    public PlayerView _playerView;
+    public CommonHandler _playerCommonHandler;
 
 
 }

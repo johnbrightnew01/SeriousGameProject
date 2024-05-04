@@ -63,20 +63,18 @@ public class GameController : MonoBehaviour
         if(scn == SceneList.GamePlayScene1)
         {
             UIController.Instance.ShowLoadingAnimation();
-            UIController.Instance.uiMenu.gameObject.SetActive(false);
-            UIController.Instance.uiGamePlay.gameObject.SetActive(true);
+            UIController.Instance.ShowUI(UIController.UiType.gamePlayUI, true);
             menuScene.SetActive(false);
             gamePlayScene1.SetActive(true);
-            Controller.self.timeLineController.OnStartScene(scn);
+          //  Controller.self.timeLineController.OnStartScene(scn);
             Controller.self.cameraController.DoActiveVirtualCamera(Controller.self.cameraController.playerCam, false);
         }
     }
 
     public void ShowIntroScene()
     {
-        UIController.Instance.uiMenu.gameObject.SetActive(true);
-        UIController.Instance.uiGamePlay.gameObject.SetActive(false);
-        UIController.Instance.uiGameOver.gameObject.SetActive(false);
+        UIController.Instance.ShowUI( UIController.UiType.menuUI, true);
+        
 
         menuScene.gameObject.SetActive(true);
         gamePlayScene1.gameObject.SetActive(false);

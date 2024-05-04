@@ -1,31 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerView : MonoBehaviour
 {
-    public enum PlayerDirection
-    {
-        forward,
-        right,
-        back,
-        left
-    }
-
-    public enum PlayerAnimationType
-    {
-        idle,
-        walk,
-        jump
-    }
+ 
 
     [SerializeField, ReadOnly]
     private Animator playerAnim;
+    [SerializeField]
+    private float moveSpeed = 2f;
+    
+
 
     private void Awake()
     {
         playerAnim = GetComponentInChildren<Animator>();
     }
+
+  
 
 
     public void PlayAnimation(PlayerDirection dir, PlayerAnimationType animType)

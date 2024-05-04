@@ -19,6 +19,7 @@ public class CameraController : MonoBehaviour
 
     public void DoActiveVirtualCamera(CinemachineVirtualCamera nextCam, bool doBlend , float blendTime = 1f)
     {
+        return;
         if (doBlend)
         {
             camBrain.m_DefaultBlend.m_Time = blendTime;

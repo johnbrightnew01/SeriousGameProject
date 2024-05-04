@@ -12,6 +12,9 @@ public class Controller : MonoBehaviour
     public LevelController levelController;
     public PlayerController playerController;
     public TimeLineController timeLineController;
+    public InputController inputController;
+
+
 
     void Awake()
     {
