@@ -17,7 +17,7 @@ public class InputController : MonoBehaviour
             isMoving = true;
             Controller.self.playerController._playerCommonHandler.DoMove(PlayerDirection.left);
         }
-        else if (Input.GetKey("d"))
+        if (Input.GetKey("d"))
         {
             Controller.self.playerController._playerCommonHandler.DoMove(PlayerDirection.right);
             isMoving = true;
@@ -28,7 +28,7 @@ public class InputController : MonoBehaviour
             isMoving = true;
             Controller.self.playerController._playerCommonHandler.DoMove(PlayerDirection.up);
         }
-        else if (Input.GetKey("s"))
+        if (Input.GetKey("s"))
         {
             isMoving = true;
             Controller.self.playerController._playerCommonHandler.DoMove(PlayerDirection.down);
@@ -37,6 +37,11 @@ public class InputController : MonoBehaviour
         if (!isMoving)
         {
             Controller.self.playerController._playerCommonHandler.DoMove(PlayerDirection.none);
+        }
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            Controller.self.playerController._playerCommonHandler._attackHandler.Attack();
         }
 
     }

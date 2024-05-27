@@ -10,5 +10,13 @@ public class PlayerController : MonoBehaviour
     public PlayerView _playerView;
     public CommonHandler _playerCommonHandler;
 
+    public List<CommonHandler> _enemyList;
+
+    public CommonHandler GetTargetPlayer()
+    {
+        if (_playerCommonHandler.isDead) return null;
+
+        return _playerCommonHandler;
+    }
 
 }

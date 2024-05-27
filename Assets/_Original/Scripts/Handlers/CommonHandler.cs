@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Timers;
 using UnityEngine;
 
 public enum PlayerDirection
@@ -33,20 +34,21 @@ public enum PlayerAnimationType
 
 public class CommonHandler : MonoBehaviour
 {
+    [field: SerializeField] public bool isPlayer;
     [ReadOnly] public AttackHandler _attackHandler;
     [ReadOnly] public HealthHandler _healthHandler;
     [ReadOnly] public UIHandler _uiHandler;
     [ReadOnly] public CharacterController _charController;
     [ReadOnly, SerializeField] private Animator anim;
-    [SerializeField] private Transform playerHolder;
+    public Transform _playerHolder;
 
     [HideInInspector] public int _runHash = Animator.StringToHash("run");
     [HideInInspector] public int _attackHash = Animator.StringToHash("attack");
     [HideInInspector] public int _deadHash = Animator.StringToHash("dead");
 
-    [SerializeField, ReadOnly] private Rigidbody playerRb;
+    [SerializeField, ReadOnly] public Rigidbody _playerRb;
     [SerializeField] private float moveSpeed;
-
+    [field: SerializeField, ReadOnly] public bool isDead;
 
 
     private void Awake()
@@ -61,43 +63,61 @@ public class CommonHandler : MonoBehaviour
         _uiHandler.InitializeHandler(this);
 
         anim = GetComponentInChildren<Animator>();
-        playerRb = GetComponent<Rigidbody>();
+        _playerRb = GetComponent<Rigidbody>();
     }
 
     public void DoMove(PlayerDirection dir)
     {
+        if (!isPlayer) return;
+        if (_attackHandler.isAttacking || isDead)
+        {
+            _playerRb.velocity = Vector3.zero;
+            return;
+        }
+
+        Vector3 customDir = Vector3.zero;
         if(dir == PlayerDirection.left)
         {
-            playerRb.MovePosition(playerRb.position + Vector3.forward * moveSpeed * Time.deltaTime);
-            // playerRb.Move(Vector3.forward * moveSpeed * Time.deltaTime, Quaternion.identity);
-            
-            playerHolder.transform.rotation = Quaternion.Euler(0, 180f, 0);
+            customDir += Vector3.forward;
+            _playerRb.MovePosition(_playerRb.position + Vector3.forward * moveSpeed * Time.deltaTime);
+            _playerHolder.transform.rotation = Quaternion.Euler(0, 180f, 0);
         }
-        else if(dir == PlayerDirection.right)
+        if(dir == PlayerDirection.right)
         {
-            // playerRb.Move(Vector3.back * -1f *moveSpeed * Time.deltaTime, Quaternion.identity);
-            playerRb.MovePosition(playerRb.position + Vector3.back * moveSpeed * Time.deltaTime);
-            playerHolder.transform.rotation = Quaternion.identity;
+            customDir += Vector3.back;
+            _playerRb.MovePosition(_playerRb.position + Vector3.back * moveSpeed * Time.deltaTime);
+            _playerHolder.transform.rotation = Quaternion.identity;
         }
-      //  Debug.Log(dir);
         if(dir == PlayerDirection.up)
         {
-            playerRb.MovePosition(playerRb.position + Vector3.right * moveSpeed * Time.deltaTime);
-            // playerRb.Move(Vector3.right * moveSpeed * Time.deltaTime, Quaternion.identity);
+            customDir += Vector3.right;
+            _playerRb.MovePosition(_playerRb.position + Vector3.right * moveSpeed * Time.deltaTime);            
         }
-        else if (dir == PlayerDirection.down)
+        if (dir == PlayerDirection.down)
         {
-            //  playerRb.Move(Vector3.left * moveSpeed * Time.deltaTime, Quaternion.identity);
-            playerRb.MovePosition(playerRb.position + Vector3.left * moveSpeed * Time.deltaTime);
-        }
-
+            customDir += Vector3.left;
+            _playerRb.MovePosition(_playerRb.position + Vector3.left * moveSpeed * Time.deltaTime);
+        }      
         if(dir == PlayerDirection.none)
         {
+           // _playerRb.velocity = Vector3.zero;
             UpdateAnimator(PlayerAnimationType.idle);
         }
+        else
+        {
+            UpdateAnimator(PlayerAnimationType.walk);
+        }        
     }
 
+    public void DoAttackAnimation()
+    {
+        if (isDead) return;
+        anim.SetBool(_runHash, false);
+        anim.SetBool(_attackHash, true);
 
+    }
+
+   
 
     public void UpdateAnimator(PlayerAnimationType animType)
     {
@@ -108,7 +128,8 @@ public class CommonHandler : MonoBehaviour
         if(animType == PlayerAnimationType.punch)
         {
             anim.SetBool(_attackHash, true);
-            Invoke("CancellAttackAnim", 1f);
+            
+            Invoke("CancellAttackAnim", GetAttackAnimationTime());
         }
         else if(animType == PlayerAnimationType.walk)
         {
@@ -118,18 +139,29 @@ public class CommonHandler : MonoBehaviour
         {
             anim.SetBool(_runHash, false);
         }
-
-
     }
 
-    private void CancellAttackAnim()
+
+    private void CancellAttackAnim() // call from Invoke
     {
         anim.SetBool(_attackHash, false);
+        _attackHandler.OnAttackDone();
     }
 
 
-    public void DoAttack()
+    private float GetAttackAnimationTime()
     {
-
+        var clipsList = anim.runtimeAnimatorController.animationClips;
+        for (int i = 0; i < clipsList.Length; i++)
+        {
+            if (clipsList[i].name == "Attack")
+            {
+                return clipsList[i].length;
+            }
+        }
+        return 0;
     }
+
+
+   
 }
