@@ -13,7 +13,7 @@ public class BillboardController : MonoBehaviour
     private void Awake()
     {
         mCam = Camera.main;
-        
+        if (envHolder == null) return;
         var bill = envHolder.GetComponentsInChildren<BillboardView>();
         foreach (var item in bill)
         {

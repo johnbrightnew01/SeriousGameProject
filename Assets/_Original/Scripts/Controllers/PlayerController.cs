@@ -19,4 +19,17 @@ public class PlayerController : MonoBehaviour
         return _playerCommonHandler;
     }
 
+
+    public void RemoveThisEnemy(CommonHandler cmnH)
+    {
+        for (int i = 0; i < _enemyList.Count; i++)
+        {
+            if (_enemyList[i] == cmnH)
+            {
+                _enemyList.RemoveAt(i);
+                break;
+            }
+        }
+    }
+
 }

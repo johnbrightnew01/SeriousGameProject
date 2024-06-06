@@ -10,6 +10,7 @@ public class InputController : MonoBehaviour
     private bool isMoving;
     void FixedUpdate()
     {
+        if (Controller.self.sequenceController.currentSequence != Sequence.bar_seq) return;
         if (!isTakeInput) return;
         isMoving = false;
         if (Input.GetKey("a"))

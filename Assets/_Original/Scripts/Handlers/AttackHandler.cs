@@ -5,6 +5,7 @@ using UnityEngine;
 public class AttackHandler : MonoBehaviour
 {
     [ReadOnly, SerializeField] private CommonHandler commonHandler;
+    [SerializeField] private float hitDamage = 10f;
     [field: SerializeField, ReadOnly] public bool isAttacking { get; private set; }
     [field: ReadOnly,SerializeField] public CommonHandler currentTarget { get; private set; }
 
@@ -22,7 +23,12 @@ public class AttackHandler : MonoBehaviour
             Debug.Log("attack Anim");
           //  commonHandler.DoAttackAnimation();
         }
+    }
 
+    public void DoReduceOthersHP()
+    {
+        if (currentTarget == null) return;
+        currentTarget._healthHandler.ReduceHealth(hitDamage);
     }
 
     public void OnAttackDone()

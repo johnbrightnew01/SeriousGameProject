@@ -13,6 +13,7 @@ public class Controller : MonoBehaviour
     public PlayerController playerController;
     public TimeLineController timeLineController;
     public InputController inputController;
+    public SequenceController sequenceController;
 
 
 

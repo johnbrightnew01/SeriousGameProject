@@ -15,5 +15,10 @@ public class AnimationTrigger : MonoBehaviour
     {
        // commonH._attackHandler.OnAttackDone();
     }
+
+    public void OnAttackHit()
+    {
+        commonH._attackHandler.DoReduceOthersHP();
+    }
     
 }

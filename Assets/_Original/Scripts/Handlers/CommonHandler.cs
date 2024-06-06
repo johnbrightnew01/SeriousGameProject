@@ -35,6 +35,7 @@ public enum PlayerAnimationType
 public class CommonHandler : MonoBehaviour
 {
     [field: SerializeField] public bool isPlayer;
+    [field: SerializeField] public float totalHealth = 100f;
     [ReadOnly] public AttackHandler _attackHandler;
     [ReadOnly] public HealthHandler _healthHandler;
     [ReadOnly] public UIHandler _uiHandler;
@@ -48,7 +49,7 @@ public class CommonHandler : MonoBehaviour
 
     [SerializeField, ReadOnly] public Rigidbody _playerRb;
     [SerializeField] private float moveSpeed;
-    [field: SerializeField, ReadOnly] public bool isDead;
+    [field: SerializeField, ReadOnly] public bool isDead { get; private set; }
 
 
     private void Awake()
@@ -117,6 +118,18 @@ public class CommonHandler : MonoBehaviour
 
     }
 
+
+    public void OnDead()
+    {
+        if (isDead) return;
+        isDead = true;
+        // do effects
+       // if (!isPlayer)
+        {
+            Controller.self.playerController.RemoveThisEnemy(this);
+            Destroy(this.gameObject, 0.5f);
+        }
+    }
    
 
     public void UpdateAnimator(PlayerAnimationType animType)
