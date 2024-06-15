@@ -61,15 +61,5 @@ public class GameController : MonoBehaviour
 
  
 
-    public void DoStartShooting()
-    {
-        Invoke("MoveToTheShootingCamera", 1f);
-    }
-
-    private void MoveToTheShootingCamera() // call from event(Invoke)
-    {
-        Controller.self.cameraController.DoActiveVirtualCamera(Controller.self.cameraController.shootCam, true);
-        UIController.Instance.targetController.StartFight();
-    }
    
 }

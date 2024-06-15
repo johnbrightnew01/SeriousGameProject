@@ -33,7 +33,7 @@ public class IntroSceneView : MonoBehaviour
 
     private void OnEndTheScene()
     {
-        Controller.self.sequenceController.UpdateSequence(Sequence.bar_seq);
+        Controller.self.sequenceController.UpdateSequence(Sequence.intreactive_intro_seq);
 
 
         // Black screen animation

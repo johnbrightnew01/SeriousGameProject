@@ -21,7 +21,8 @@ public class UIController : MonoBehaviour
     private UIGameOver uiGameOver;
     public Image loadingImage;
     public TargetController targetController;
-
+    public Canvas floatingUICanvas;
+    public GameObject interactiveIntroUI;
 
     private void Awake()
     {
@@ -29,6 +30,12 @@ public class UIController : MonoBehaviour
         {
             Instance = this;
         }
+    }
+
+
+    public void ToggleInteractiveIntroUI(bool isEanble)
+    {
+        interactiveIntroUI?.gameObject.SetActive(isEanble);
     }
 
     public void ShowUI(UiType type, bool isAnimation, float blendTime = 1f)

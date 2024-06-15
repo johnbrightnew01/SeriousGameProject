@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyView : MonoBehaviour
 {
     [SerializeField, ReadOnly] private CommonHandler enemyCommonHandler;    
-    [Range(0,1f), SerializeField] private float attackFrequency = 0.5f;
+    [Range(0.1f,3f), SerializeField] private float attackFrequency = 0.5f;
     [SerializeField] private float minAttackDist = 2f;
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField,ReadOnly]private float deltaCounter = 0;
@@ -62,8 +62,7 @@ public class EnemyView : MonoBehaviour
 
 
     private void AttackNow()
-    {
-        Debug.Log("attack Now");
+    {   
         enemyCommonHandler._attackHandler.Attack();
     }
 
