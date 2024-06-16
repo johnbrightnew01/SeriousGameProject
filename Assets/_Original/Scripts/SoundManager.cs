@@ -7,7 +7,7 @@ public class SoundManager : MonoBehaviour
     public static SoundManager Instance;
     public AudioSource bgAudio;
     public AudioSource thunderSound;
-
+    public AudioSource barSound;
 
     private void Awake()
     {
@@ -16,6 +16,20 @@ public class SoundManager : MonoBehaviour
             Instance = this;
         }
     }
+
+    public void ToggleBarSound(bool isPlay)
+    {
+        if (isPlay)
+        {
+            barSound.Play();
+        }
+        else
+        {
+            barSound.Stop();
+        }
+    }
+
+
 
     public void DoPlayBG()
     {

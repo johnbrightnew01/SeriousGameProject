@@ -36,6 +36,26 @@ public class BotHandler : MonoBehaviour
         });
 
     }
+    public void DoMoveToThisPos(Vector3 pos, float moveTime = 2f)
+    {
+        //  var targtPos = pos.position;
+        //   targtPos.y = this.transform.position.y;
+        if (this.transform.position.z - pos.z > 0)
+        {
+            this.transform.GetChild(0).transform.localRotation = Quaternion.Euler(0, 180f, 0);
+        }
+        else
+        {
+            this.transform.GetChild(0).transform.localRotation = Quaternion.Euler(0, 0, 0);
+        }
+        anim.SetBool("run", true);
+        this.transform.DOMove(pos, moveTime).SetEase(Ease.Linear).OnComplete(() =>
+        {
+            anim.SetBool("run", false);
+
+        });
+
+    }
 
     public void ChangeDirection(bool isLeft)
     {
@@ -50,9 +70,9 @@ public class BotHandler : MonoBehaviour
     }
 
 
-    public void ShowSpeech(int indx)
+    public void ShowSpeech(int indx, float popUpTime = 2f)
     {
-        speechHander.PopupSpeech(indx);
+        speechHander.PopupSpeech(indx, popUpTime);
     }
 
   

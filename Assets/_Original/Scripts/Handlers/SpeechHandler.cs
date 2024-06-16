@@ -17,11 +17,11 @@ public class SpeechHandler : MonoBehaviour
         floatingUI.ToggleUIType(false);
     }
 
-    public void PopupSpeech(int speechLine)
+    public void PopupSpeech(int speechLine, float popUpTime)
     {
         Debug.Log("Signal Receive " + speechLine);
 
-        floatingUI.ShowSpeechCloud(speechList[speechLine]);
+        floatingUI.ShowSpeechCloud(speechList[speechLine], popUpTime);
     }
 
 
