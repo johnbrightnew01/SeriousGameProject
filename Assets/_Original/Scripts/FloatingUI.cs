@@ -48,7 +48,7 @@ public class FloatingUI : MonoBehaviour
         speechPanel.SetActive(!isHealthBar);
     }
 
-    public void ShowSpeechCloud(string speech, float popUpTime = 1f)
+    public void ShowSpeechCloud(string speech, float popUpTime = 2f)
     {
        // healBarPanel.SetActive(false);
       // speechPanel.SetActive(true);
@@ -73,6 +73,7 @@ public class FloatingUI : MonoBehaviour
 
     public void UpdateHp(float currentHealth)
     {
+        healBarPanel.transform.localScale = Vector3.one;
         healthBar.DOFillAmount(currentHealth, 0.4f);
     }
 

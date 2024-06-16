@@ -5,7 +5,7 @@ using UnityEngine;
 public class HealthHandler : MonoBehaviour
 {
     [ReadOnly, SerializeField] private CommonHandler commonHandler;
-    [ReadOnly, SerializeField] private float remailHP;
+    [ReadOnly, SerializeField] private float remainHp;
     [SerializeField, ReadOnly] public FloatingUI hpUi;
     [SerializeField] private Transform uiTargetPos;
 
@@ -13,7 +13,7 @@ public class HealthHandler : MonoBehaviour
     public void InitializeHandler(CommonHandler cmnHandler)
     {
         commonHandler = cmnHandler;
-        remailHP = cmnHandler.totalHealth;
+        remainHp = cmnHandler.totalHealth;
         hpUi = GetComponentInChildren<FloatingUI>();      
     }
 
@@ -29,18 +29,22 @@ public class HealthHandler : MonoBehaviour
 
     public void ReduceHealth(float reduceBy)
     {
-        remailHP -= reduceBy;
-        remailHP = Mathf.Clamp(remailHP, 0, 100f);
+  
+        if (commonHandler.isBlocking) return;
+  
+        remainHp -= reduceBy;
+        remainHp = Mathf.Clamp(remainHp, 0, commonHandler.totalHealth);
         if(hpUi != null)
         {
-            hpUi.UpdateHp(remailHP/commonHandler.totalHealth);
+            hpUi.UpdateHp(remainHp/commonHandler.totalHealth);
         }
         if (commonHandler.isPlayer)
         {
-            UIGamePlay.Instance.UpdatePlayerHP(  ( remailHP/ commonHandler.totalHealth));       
+           
+            UIGamePlay.Instance.UpdatePlayerHP(  ( remainHp/ commonHandler.totalHealth));       
         }
 
-        if(remailHP <= 0)
+        if(remainHp <= 0)
         {
             // dead
             commonHandler.OnDead();

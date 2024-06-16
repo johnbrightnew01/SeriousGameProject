@@ -17,13 +17,17 @@ public class BarSceneView : MonoBehaviour
 
     [SerializeField] private Transform cameraInitialPos;
     [SerializeField] private Transform cameraMovePos_1;
-    
+
     [Space(5)]
+    [SerializeField] private Transform storme_initialPos;
+    [SerializeField] private Transform police_1_initialPos;
+    [SerializeField] private Transform police_2_initialPos;
     [SerializeField] private Transform police1_Pos_1;
     [SerializeField] private Transform police2_Pos_1;
     [Space(5)]
     [SerializeField] private Transform police1_Pos_2;
     [SerializeField] private Transform police2_Pos_2;
+    [Space(5)]
     [SerializeField] private Transform police2_Pos_3;
     [Space(5)]
     [SerializeField] private Transform storme_Pos_1;
@@ -36,6 +40,7 @@ public class BarSceneView : MonoBehaviour
     [SerializeField] private float maxDistToTrigger = 1f;
     [SerializeField, ReadOnly] private float currentDist;
 
+
     private void Awake()
     {
         policeBot_1 = police1.GetComponent<BotHandler>();
@@ -46,6 +51,9 @@ public class BarSceneView : MonoBehaviour
 
     private void OnEnable()
     {
+        storme.transform.position = storme_initialPos.position;
+        police1.transform.position = police_1_initialPos.position;
+        police2.transform.position = police_2_initialPos.position;
         Controller.self.cameraController.barFreeCamera.transform.position = cameraInitialPos.position;
         Controller.self.cameraController.DoActiveVirtualCamera(Controller.self.cameraController.barFreeCamera, false);
         StartCoroutine(DoStatTheSequence());
@@ -55,6 +63,7 @@ public class BarSceneView : MonoBehaviour
 
     private void Update()
     {
+        
         if (!isTakeInput) return;
         if (Input.GetKey("a"))
         {
@@ -106,22 +115,24 @@ public class BarSceneView : MonoBehaviour
     IEnumerator DoStatTheSequence()
     {
         yield return new WaitForSeconds(0.1f);
-        policeBot_1.DoMoveToThisPos(police1_Pos_1, 2f);
-        policeBot_2.DoMoveToThisPos(police2_Pos_1, 2.5f);
-        yield return new WaitForSeconds(2.8f);
+        policeBot_1.DoMoveToThisPos(police1_Pos_1, 2.5f);
+        policeBot_2.DoMoveToThisPos(police2_Pos_1, 3f);
+        yield return new WaitForSeconds(3.2f);
         policeBot_1.ShowSpeech(1); // Police! We’re taking the place!
-        yield return new WaitForSeconds(1.2f);
-        Controller.self.cameraController.barFreeCamera.transform.DOMove(cameraMovePos_1.position, 1.3f);
-        yield return new WaitForSeconds(0.7f);
-        stormeHander.DoMoveToThisPos(storme_Pos_1, 2.5f);
-        policeBot_1.DoMoveToThisPos(police1_Pos_2);
-        policeBot_2.DoMoveToThisPos(police2_Pos_3, 3f);
         yield return new WaitForSeconds(2.5f);
-        isTakeInput = true;
+        policeBot_1.DoMoveToThisPos(police1_Pos_2, 17f);
+        yield return new WaitForSeconds(0.4f);
+        policeBot_2.DoMoveToThisPos(police2_Pos_2, 17f);
+        yield return new WaitForSeconds(5f);
+        Controller.self.cameraController.barFreeCamera.transform.DOMove(cameraMovePos_1.position,19f);
+        yield return new WaitForSeconds(18f);
+        stormeHander.DoMoveToThisPos(storme_Pos_1, 7f);
+        yield return new WaitForSeconds(7f);
+     //   isTakeInput = true;
 
         stormeHander.ShowSpeech(0); //What? Again?
 
-        yield return new WaitUntil(() => onPosition);
+      /*  yield return new WaitUntil(() => onPosition);
         onPosition = false;
         isMoveLeft = !isMoveLeft;
         policeBot_2.ChangeDirection(false);
@@ -184,7 +195,7 @@ public class BarSceneView : MonoBehaviour
         policeBot_2.anim.SetTrigger("push");
         yield return new WaitForSeconds(0.25f);
         stormeHander.anim.SetTrigger("trigger");
-        isTakeInput = false;
+        isTakeInput = false;*/
 
 
     }

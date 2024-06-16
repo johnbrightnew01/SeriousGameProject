@@ -22,7 +22,7 @@ public class SequenceController : MonoBehaviour
     public OutroSceneView outroScene;
     [SerializeField] private bool isStartSequenceFromBeginning = true;
 
-    [field: SerializeField, ReadOnly] public Sequence currentSequence { get; private set; } = Sequence.intro_seq;
+    [field: SerializeField] public Sequence currentSequence { get; private set; } = Sequence.intro_seq;
 
     private void Start()
     {

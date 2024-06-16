@@ -31,6 +31,11 @@ public class AttackHandler : MonoBehaviour
         }
     }
 
+    private void DoBlockAttack()
+    {
+
+    }
+
     private void Update()
     {
         if (commonHandler.isPlayer)

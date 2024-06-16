@@ -50,7 +50,9 @@ public class CommonHandler : MonoBehaviour
     [SerializeField, ReadOnly] public Rigidbody _playerRb;
     [SerializeField] private float moveSpeed;
     [field: SerializeField, ReadOnly] public bool isDead { get; private set; }
-
+    [SerializeField] float blockDeltaTime = 2f;
+    [SerializeField] float blockTime = 1f;
+    [field: SerializeField, ReadOnly] public bool isBlocking { get; private set; }
 
     private void Awake()
     {
@@ -67,8 +69,28 @@ public class CommonHandler : MonoBehaviour
         _playerRb = GetComponent<Rigidbody>();
     }
 
+    public void DoBlockAttack()
+    {
+        if (isBlocking) return;
+        isBlocking = true;
+        anim.SetBool("block", true);
+        Invoke("RemoveBlock", blockTime);
+    }
+
+    private void RemoveBlock()
+    {
+        anim.SetBool("block", false);
+        isBlocking = false;
+    }
+
+
+
     public void DoMove(PlayerDirection dir)
     {
+        if (isBlocking && dir != PlayerDirection.none)
+        {
+            RemoveBlock();
+        }
         if (!isPlayer) return;
         if (_attackHandler.isAttacking || isDead)
         {
@@ -92,12 +114,12 @@ public class CommonHandler : MonoBehaviour
         if(dir == PlayerDirection.up)
         {
             customDir += Vector3.right;
-            _playerRb.MovePosition(_playerRb.position + Vector3.right * moveSpeed * Time.deltaTime);            
+            _playerRb.MovePosition(_playerRb.position + Vector3.up * moveSpeed * Time.deltaTime);            
         }
         if (dir == PlayerDirection.down)
         {
             customDir += Vector3.left;
-            _playerRb.MovePosition(_playerRb.position + Vector3.left * moveSpeed * Time.deltaTime);
+            _playerRb.MovePosition(_playerRb.position + Vector3.down * moveSpeed * Time.deltaTime);
         }      
         if(dir == PlayerDirection.none)
         {
@@ -124,13 +146,19 @@ public class CommonHandler : MonoBehaviour
         if (isDead) return;
         isDead = true;
         // do effects
-       // if (!isPlayer)
+        if (!isPlayer)
         {
+            var plc = GetComponent<EnemyView>();
+            var col = GetComponent<Collider>();
+            col.enabled = false;
+            plc.DoRunAway();
             Controller.self.playerController.RemoveThisEnemy(this);
-            Destroy(this.gameObject, 0.5f);
+            anim.speed = 3f;
+            Destroy(this.gameObject, 5f);
         }
     }
    
+
 
     public void UpdateAnimator(PlayerAnimationType animType)
     {

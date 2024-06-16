@@ -21,7 +21,7 @@ public class UIGamePlay : MonoBehaviour
 
     public void UpdatePlayerHP(float hpLeft)
     {
-        playerHpBar.DOFillAmount(1f - hpLeft, 0.5f);
+        playerHpBar.DOFillAmount( hpLeft, 0.5f);
     }
 
 

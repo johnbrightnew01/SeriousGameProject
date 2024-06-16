@@ -1,0 +1,406 @@
+fileFormatVersion: 2
+guid: b26211bc48fde8743995ba86b9d9e4cc
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 72
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Title_and_Thunder_Spritesheet_0
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 3156
+        width: 1848
+        height: 926
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33f5d427efcc44b409613a490520ec4d
+      internalID: 1229227217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Title_and_Thunder_Spritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 3244
+        y: 4052
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1e627f4665f5274c9695b3c0946cc57
+      internalID: 1182657302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Title_and_Thunder_Spritesheet_5
+      rect:
+        serializedVersion: 2
+        x: 1914
+        y: 3152
+        width: 1841
+        height: 930
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 676954b446be2634292b5cd481b35b45
+      internalID: 958226776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Title_and_Thunder_Spritesheet_14
+      rect:
+        serializedVersion: 2
+        x: 358
+        y: 3152
+        width: 22
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97e5ac07ab4d4754db76b263cb23c5c3
+      internalID: 1144916330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Title_and_Thunder_Spritesheet_15
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 2606
+        width: 86
+        height: 74
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 221412cece9dd17428d3124e8859c382
+      internalID: -1639513948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Title_and_Thunder_Spritesheet_16
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 2088
+        width: 1848
+        height: 902
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1fffb71f370e9074bb53bc7c17de9447
+      internalID: -355054952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Title_and_Thunder_Spritesheet_18
+      rect:
+        serializedVersion: 2
+        x: 1908
+        y: 2088
+        width: 1848
+        height: 902
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf0a2771489a031458b851c461e3c04c
+      internalID: -523549404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Title_and_Thunder_Spritesheet_19
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2432
+        width: 106
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1702c425e1ea3664c9a35699efc644a2
+      internalID: 2072736865
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Title_and_Thunder_Spritesheet_21
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 1544
+        width: 86
+        height: 74
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b3f972b30aae474cae5bdb680319d0d
+      internalID: -337040115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Title_and_Thunder_Spritesheet_22
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 1026
+        width: 1848
+        height: 930
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71ea77e06c0186b44b8fab48cc24a0a5
+      internalID: 1163604437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Title_and_Thunder_Spritesheet_24
+      rect:
+        serializedVersion: 2
+        x: 1908
+        y: 1026
+        width: 1848
+        height: 912
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f0885428d52e42418c4d7ac1a988196
+      internalID: 887578021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Title_and_Thunder_Spritesheet_25
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1368
+        width: 106
+        height: 58
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9576796a150af44c8b441b65c473a95
+      internalID: 1745008608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Title_and_Thunder_Spritesheet_0: 1229227217
+      Title_and_Thunder_Spritesheet_1: 1927002087
+      Title_and_Thunder_Spritesheet_10: -1463903777
+      Title_and_Thunder_Spritesheet_11: 778754261
+      Title_and_Thunder_Spritesheet_12: -436014987
+      Title_and_Thunder_Spritesheet_13: 1088973730
+      Title_and_Thunder_Spritesheet_14: 1144916330
+      Title_and_Thunder_Spritesheet_15: -1639513948
+      Title_and_Thunder_Spritesheet_16: -355054952
+      Title_and_Thunder_Spritesheet_17: -2020600409
+      Title_and_Thunder_Spritesheet_18: -523549404
+      Title_and_Thunder_Spritesheet_19: 2072736865
+      Title_and_Thunder_Spritesheet_2: 1182657302
+      Title_and_Thunder_Spritesheet_20: -1866873412
+      Title_and_Thunder_Spritesheet_21: -337040115
+      Title_and_Thunder_Spritesheet_22: 1163604437
+      Title_and_Thunder_Spritesheet_23: -1215100451
+      Title_and_Thunder_Spritesheet_24: 887578021
+      Title_and_Thunder_Spritesheet_25: 1745008608
+      Title_and_Thunder_Spritesheet_26: -682182202
+      Title_and_Thunder_Spritesheet_3: -255293522
+      Title_and_Thunder_Spritesheet_4: 318121626
+      Title_and_Thunder_Spritesheet_5: 958226776
+      Title_and_Thunder_Spritesheet_6: 45500393
+      Title_and_Thunder_Spritesheet_7: 559404776
+      Title_and_Thunder_Spritesheet_8: 678445264
+      Title_and_Thunder_Spritesheet_9: -1528309598
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

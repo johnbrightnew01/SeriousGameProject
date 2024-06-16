@@ -18,8 +18,8 @@ public class BotHandler : MonoBehaviour
 
     public void DoMoveToThisPos(Transform pos, float moveTime = 2f )
     {
-        var targtPos = pos.position;
-        targtPos.y = this.transform.position.y;
+      //  var targtPos = pos.position;
+     //   targtPos.y = this.transform.position.y;
         if(this.transform.position.z - pos.position.z > 0)
         {
             this.transform.GetChild(0).transform.localRotation = Quaternion.Euler(0, 180f, 0);
@@ -29,10 +29,9 @@ public class BotHandler : MonoBehaviour
             this.transform.GetChild(0).transform.localRotation = Quaternion.Euler(0, 0, 0);
         }
         anim.SetBool("run", true);
-        this.transform.DOMove(targtPos, moveTime).SetEase(Ease.Linear).OnComplete(() =>
+        this.transform.DOMove(pos.position, moveTime).SetEase(Ease.Linear).OnComplete(() =>
         {
-            anim.SetBool("run", false);
-    
+            anim.SetBool("run", false);   
             
         });
 

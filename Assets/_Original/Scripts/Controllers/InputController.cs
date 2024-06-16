@@ -34,7 +34,11 @@ public class InputController : MonoBehaviour
             isMoving = true;
             Controller.self.playerController._playerCommonHandler.DoMove(PlayerDirection.down);
         }
-
+        if (Input.GetKey("e"))
+        {
+            isMoving = false; ;
+            Controller.self.playerController._playerCommonHandler.DoBlockAttack();
+        }
         if (!isMoving)
         {
             Controller.self.playerController._playerCommonHandler.DoMove(PlayerDirection.none);

@@ -9,7 +9,7 @@ public class EnemyView : MonoBehaviour
     [SerializeField] private float minAttackDist = 2f;
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField,ReadOnly]private float deltaCounter = 0;
-    
+    [SerializeField, ReadOnly] private bool isRunningAway = false;
 
     private void Awake()
     {
@@ -21,6 +21,25 @@ public class EnemyView : MonoBehaviour
     {
         if (Controller.self.sequenceController.currentSequence != Sequence.bar_seq && Controller.self.sequenceController.currentSequence != Sequence.street_seq) return;
         if (enemyCommonHandler == null) return;
+
+        if (isRunningAway)
+        {
+            if(enemyCommonHandler._playerHolder.transform.localRotation.eulerAngles.y == 0)
+            {
+
+                enemyCommonHandler.transform.Translate(Vector3.forward * moveSpeed *10f* Time.deltaTime);
+                enemyCommonHandler.transform.rotation = Quaternion.Euler(0, 180f, 0);
+            }
+            else
+            {          
+                enemyCommonHandler.transform.Translate(Vector3.back * moveSpeed * 10f * Time.deltaTime);
+                enemyCommonHandler.transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+            enemyCommonHandler.UpdateAnimator(PlayerAnimationType.walk);
+
+            return;
+        }
+
         if (enemyCommonHandler.isDead) return;
 
         if(enemyCommonHandler._attackHandler.currentTarget == null)
@@ -40,9 +59,7 @@ public class EnemyView : MonoBehaviour
             {
                 deltaCounter = 0;
                 AttackNow();
-            }
-          
-          
+            }         
         }
         else
         {
@@ -79,14 +96,43 @@ public class EnemyView : MonoBehaviour
 
         if(Vector3.Distance(this.transform.position, enemyCommonHandler._attackHandler.currentTarget.transform.position) <= minAttackDist)
         {
+            if (IsFixedYMovement())
+            {
+                enemyCommonHandler.UpdateAnimator(PlayerAnimationType.idle);
+                return true;
+            }
+           
+        }
+        else
+        {
+            enemyCommonHandler.transform.Translate((enemyCommonHandler._attackHandler.currentTarget.transform.position - this.transform.position) * moveSpeed * Time.deltaTime);
+          
+        }
+        enemyCommonHandler.UpdateAnimator(PlayerAnimationType.walk);
 
-            enemyCommonHandler.UpdateAnimator( PlayerAnimationType.idle);
+        return false;
+    }
+
+    private bool IsFixedYMovement()
+    {
+        if(( enemyCommonHandler._attackHandler.currentTarget.transform.position.y  - this.transform.position.y) >=  0.2f)
+        {
+            enemyCommonHandler.transform.Translate(Vector3.up * moveSpeed * Time.deltaTime);
+        }
+        else if ((enemyCommonHandler._attackHandler.currentTarget.transform.position.y - this.transform.position.y) <= -0.2f)
+        {
+            enemyCommonHandler.transform.Translate(Vector3.down * moveSpeed * Time.deltaTime);
+        }
+        else
+        {
             return true;
         }
-
-        enemyCommonHandler.transform.Translate((enemyCommonHandler._attackHandler.currentTarget.transform.position - this.transform.position) * moveSpeed * Time.deltaTime);
-        enemyCommonHandler.UpdateAnimator(PlayerAnimationType.walk);
         return false;
+    }
+
+    public void DoRunAway()
+    {
+        isRunningAway = true;
     }
 
 
