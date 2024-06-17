@@ -32,6 +32,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void StartSpawningEnemy()
+    {
+        StartCoroutine(StartSpawning());
+    }
+
 
     public void DoSpawnPolice(bool isSpawsRandomPos = false)
     {

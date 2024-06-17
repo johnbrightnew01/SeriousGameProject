@@ -129,7 +129,13 @@ public class CommonHandler : MonoBehaviour
         else
         {
             UpdateAnimator(PlayerAnimationType.walk);
-        }      
+        }
+
+        var pp = _playerRb.position;
+        pp.y = Mathf.Clamp(pp.y, -0.59f, 1.36f);
+        pp.z = Mathf.Clamp(pp.z, -24f, -6f);
+        _playerRb.position = pp;
+
         
 
 

@@ -76,6 +76,7 @@ public class StreetSceneView : MonoBehaviour
         player.GetComponent<PlayerView>().playerPopUpCanvas.gameObject.SetActive(true);
         yield return new WaitForSeconds(3.5f);
         Controller.self.inputController.EnableInput();
+        Controller.self.playerController.StartSpawningEnemy();
 
     }
 
