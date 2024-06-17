@@ -190,6 +190,10 @@ public class CommonHandler : MonoBehaviour
     }
 
    
+    public void BotControl(bool isRun)
+    {
+        anim.SetBool("run" , isRun);
+    }
 
 
     private float GetAttackAnimationTime()

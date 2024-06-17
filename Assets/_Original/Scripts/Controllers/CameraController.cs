@@ -12,6 +12,7 @@ public class CameraController : MonoBehaviour
     public CinemachineBrain camBrain;
     public CinemachineVirtualCamera playerCam;
     public CinemachineVirtualCamera barFreeCamera;
+    public CinemachineVirtualCamera outsideCamera;
  
     
 

@@ -11,11 +11,13 @@ public class PlayerView : MonoBehaviour
     private Animator playerAnim;
     [SerializeField]
     private float moveSpeed = 2f;
-    
+    public Canvas playerPopUpCanvas;
 
 
     private void Awake()
     {
+       
+
         playerAnim = GetComponentInChildren<Animator>();
     }
 

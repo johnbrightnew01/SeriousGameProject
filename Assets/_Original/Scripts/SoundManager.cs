@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class SoundManager : MonoBehaviour
     public AudioSource bgAudio;
     public AudioSource thunderSound;
     public AudioSource barSound;
+    public AudioSource streetSong;
 
     private void Awake()
     {
@@ -25,10 +27,48 @@ public class SoundManager : MonoBehaviour
         }
         else
         {
-            barSound.Stop();
+            barSound.DOFade(0, 1f).OnComplete(() => { 
+            
+            
+                barSound.Stop();
+            });
         }
     }
 
+    public void DoPlayBGSound(AudioSource src, bool isPlay = true, bool isFadein = false)
+    {
+        if(src != null)
+        {
+            if (isFadein)
+            {
+                if (isPlay)
+                {
+                    src.volume = 0f;
+                    src.Play();                  
+                    src.DOFade(1f, 1f);
+                }
+                else
+                {
+                    src.DOFade(0f, 1f).OnComplete(() => {
+                        src.Stop();
+                    });
+                }
+              
+            }
+            else
+            {
+                if (isPlay)
+                {
+                    src.Play();
+                }
+                else
+                {
+                    src.Stop();
+                }
+            }
+
+        }
+    }
 
 
     public void DoPlayBG()

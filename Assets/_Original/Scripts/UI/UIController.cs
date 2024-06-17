@@ -24,6 +24,7 @@ public class UIController : MonoBehaviour
     public Canvas floatingUICanvas;
     public GameObject interactiveIntroUI;
 
+
     private void Awake()
     {
         if(Instance == null)
@@ -57,14 +58,22 @@ public class UIController : MonoBehaviour
         
     }
 
-    public void ShowLoadingAnimation()
+    public void ShowLoadingAnimation(float blackTime, float fadeTime = 0.5f)
     {
-        
+        StartCoroutine(ShowFadeoutLoading(blackTime, fadeTime));
+   
+    }
+
+    IEnumerator ShowFadeoutLoading(float time, float fadeTime)
+    {
         loadingImage.gameObject.SetActive(true);
-        loadingImage.transform.DOScale(1f, 0.5f).OnComplete(() =>
-        {
-            loadingImage.gameObject.SetActive(false);
-        });
+        loadingImage.DOFade(1f, fadeTime);
+        yield return new WaitForSeconds(time);
+        
+        loadingImage.DOFade(0f, fadeTime);
+        yield return new WaitForSeconds(fadeTime);
+
+        loadingImage.gameObject.SetActive(false);
     }
    
 }

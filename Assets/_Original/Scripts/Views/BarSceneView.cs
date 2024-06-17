@@ -151,6 +151,7 @@ public class BarSceneView : MonoBehaviour
     IEnumerator DoStatTheSequence()
     {
         yield return new WaitForSeconds(0.1f);
+        UIController.Instance.ShowLoadingAnimation(2, 2);
         SoundManager.Instance.ToggleBarSound(true);
         yield return new WaitForSeconds(10f);
         policeBot_1.DoMoveToThisPos(police1_Pos_1, 2.5f);
@@ -158,6 +159,7 @@ public class BarSceneView : MonoBehaviour
         yield return new WaitForSeconds(3.2f);
       //  policeBot_1.ShowSpeech(0); // Police! We’re taking the place!
         introText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(2f);
         SoundManager.Instance.ToggleBarSound(false);
         yield return new WaitForSeconds(2.5f);
         policeBot_1.DoMoveToThisPos(police1_Pos_2, 14f);
@@ -232,6 +234,8 @@ public class BarSceneView : MonoBehaviour
             yield return new WaitForSeconds(5);
             policeBot_2.ShowSpeech(2, 4);
             yield return new WaitForSeconds(8f);
+
+            UIController.Instance.ShowLoadingAnimation(5);
         }
 
 
