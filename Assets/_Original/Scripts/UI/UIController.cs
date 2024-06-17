@@ -66,6 +66,7 @@ public class UIController : MonoBehaviour
 
     IEnumerator ShowFadeoutLoading(float time, float fadeTime)
     {
+        loadingImage.color = new Color(0, 0, 0, 1);
         loadingImage.gameObject.SetActive(true);
         loadingImage.DOFade(1f, fadeTime);
         yield return new WaitForSeconds(time);

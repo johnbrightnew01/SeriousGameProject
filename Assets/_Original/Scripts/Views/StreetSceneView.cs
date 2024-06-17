@@ -16,6 +16,7 @@ public class StreetSceneView : MonoBehaviour
 
     private void OnEnable()
     {
+        Controller.self.cameraController.DoActiveVirtualCamera(Controller.self.cameraController.outsideCamera, false);
         StartCoroutine(OnStartSegment());
     }
 
@@ -73,6 +74,9 @@ public class StreetSceneView : MonoBehaviour
         });
         yield return new WaitForSeconds(7.5f);
         player.GetComponent<PlayerView>().playerPopUpCanvas.gameObject.SetActive(true);
+        yield return new WaitForSeconds(3.5f);
+        Controller.self.inputController.EnableInput();
+
     }
 
 

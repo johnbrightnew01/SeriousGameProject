@@ -16906,7 +16906,7 @@ MonoBehaviour:
   camBrain: {fileID: 330585548}
   playerCam: {fileID: 1924291688}
   barFreeCamera: {fileID: 1040755257}
-  outsideCamera: {fileID: 0}
+  outsideCamera: {fileID: 726349198}
 --- !u!1 &1657561339
 GameObject:
   m_ObjectHideFlags: 0

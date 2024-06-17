@@ -19,7 +19,7 @@ public class EnemyView : MonoBehaviour
 
     private void Update()
     {
-        if (Controller.self.sequenceController.currentSequence != Sequence.bar_seq && Controller.self.sequenceController.currentSequence != Sequence.street_seq) return;
+        if ( Controller.self.sequenceController.currentSequence != Sequence.street_seq) return;
         if (enemyCommonHandler == null) return;
 
         if (isRunningAway)

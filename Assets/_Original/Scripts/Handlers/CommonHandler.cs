@@ -129,7 +129,10 @@ public class CommonHandler : MonoBehaviour
         else
         {
             UpdateAnimator(PlayerAnimationType.walk);
-        }        
+        }      
+        
+
+
     }
 
     public void DoAttackAnimation()

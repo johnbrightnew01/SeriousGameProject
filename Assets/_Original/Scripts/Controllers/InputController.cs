@@ -8,9 +8,14 @@ public class InputController : MonoBehaviour
     [SerializeField]
     private bool isTakeInput;
     private bool isMoving;
+
+    private void Awake()
+    {
+        isTakeInput = false;
+    }
     void FixedUpdate()
     {
-        if (Controller.self.sequenceController.currentSequence != Sequence.bar_seq) return;
+        if (Controller.self.sequenceController.currentSequence != Sequence.street_seq) return;
         if (!isTakeInput) return;
         isMoving = false;
         if (Input.GetKey("a"))
@@ -49,5 +54,10 @@ public class InputController : MonoBehaviour
             Controller.self.playerController._playerCommonHandler._attackHandler.Attack();
         }
 
+    }
+
+    public void EnableInput()
+    {
+        isTakeInput = true;
     }
 }

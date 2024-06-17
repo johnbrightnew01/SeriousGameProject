@@ -76,6 +76,7 @@ public class BarSceneView : MonoBehaviour
         police1.transform.position = police_1_initialPos.position;
         police2.transform.position = police_2_initialPos.position;
         Controller.self.cameraController.barFreeCamera.transform.position = cameraInitialPos.position;
+        UIController.Instance.ShowLoadingAnimation(2, 2);
         Controller.self.cameraController.DoActiveVirtualCamera(Controller.self.cameraController.barFreeCamera, false);
         StartCoroutine(DoStatTheSequence());
         onPosition = false;
@@ -151,7 +152,7 @@ public class BarSceneView : MonoBehaviour
     IEnumerator DoStatTheSequence()
     {
         yield return new WaitForSeconds(0.1f);
-        UIController.Instance.ShowLoadingAnimation(2, 2);
+       
         SoundManager.Instance.ToggleBarSound(true);
         yield return new WaitForSeconds(10f);
         policeBot_1.DoMoveToThisPos(police1_Pos_1, 2.5f);
@@ -238,7 +239,7 @@ public class BarSceneView : MonoBehaviour
             UIController.Instance.ShowLoadingAnimation(5);
         }
 
-
+        Controller.self.sequenceController.StartThisScene(Sequence.street_seq);
 
   
     }

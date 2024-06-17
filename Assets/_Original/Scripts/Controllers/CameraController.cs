@@ -21,7 +21,7 @@ public class CameraController : MonoBehaviour
     {
         playerCam.Priority = 0;
         barFreeCamera.Priority = 0;
-
+        outsideCamera.Priority = 0;
         nextCam.Priority = 20;
 
     }
