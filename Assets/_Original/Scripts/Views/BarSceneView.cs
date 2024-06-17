@@ -240,75 +240,7 @@ public class BarSceneView : MonoBehaviour
 
 
 
-        // isTakeInput = true;
-
-
-        /*  yield return new WaitUntil(() => onPosition);
-          onPosition = false;
-          isMoveLeft = !isMoveLeft;
-          policeBot_2.ChangeDirection(false);
-          policeBot_2.ShowSpeech(0); //Alright, young lady, let’s see your ID
-
-          yield return new WaitForSeconds(0.4f);
-          policeBot_2.anim.SetTrigger("push");
-          yield return new WaitForSeconds(0.25f);
-          stormeHander.anim.SetTrigger("trigger");
-
-
-          yield return new WaitUntil(() => onPosition);
-          onPosition = false;
-          isMoveLeft = !isMoveLeft;
-          stormeHander.ShowSpeech(1); // I showed you my ID last week!
-
-
-          yield return new WaitUntil(() => onPosition);
-          onPosition = false;
-          isMoveLeft = !isMoveLeft;
-
-          policeBot_1.ShowSpeech(1); // You know the drill. ID, or it’s pants off
-
-          yield return new WaitForSeconds(0.4f);
-          policeBot_1.anim.SetTrigger("push");
-          yield return new WaitForSeconds(0.25f);
-          stormeHander.anim.SetTrigger("trigger");
-
-          yield return new WaitUntil(() => onPosition);
-          onPosition = false;
-          isMoveLeft = !isMoveLeft;
-
-
-
-          stormeHander.ShowSpeech(2); // No
-
-          yield return new WaitUntil(() => onPosition);
-          onPosition = false;
-          isMoveLeft = !isMoveLeft;
-
-          policeBot_2.ShowSpeech(1); // Ladies’ clothes on ladies. That’s the law.
-
-          yield return new WaitForSeconds(0.4f);
-          policeBot_2.anim.SetTrigger("push");
-          yield return new WaitForSeconds(0.25f);
-          stormeHander.anim.SetTrigger("trigger");
-
-          yield return new WaitUntil(() => onPosition);
-          onPosition = false;
-          isMoveLeft = !isMoveLeft;
-
-          stormeHander.ShowSpeech(3); // Get oS me!
-
-          yield return new WaitUntil(() => onPosition);
-          onPosition = false;
-          isMoveLeft = !isMoveLeft;
-
-          policeBot_1.ShowSpeech(2); // That’s it. You’re coming with us. You’re under arrest.
-          yield return new WaitForSeconds(0.4f);
-          policeBot_2.anim.SetTrigger("push");
-          yield return new WaitForSeconds(0.25f);
-          stormeHander.anim.SetTrigger("trigger");
-          isTakeInput = false;*/
-
-
+  
     }
 
     

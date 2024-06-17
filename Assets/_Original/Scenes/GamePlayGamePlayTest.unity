@@ -4360,8 +4360,8 @@ Transform:
   m_GameObject: {fileID: 435254533}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 1.4, z: 1.83}
-  m_LocalScale: {x: 1.0205157, y: 1.0205157, z: 1.0205157}
+  m_LocalPosition: {x: 0, y: 3, z: 1.1}
+  m_LocalScale: {x: 1.7968104, y: 1.7968104, z: 1.7968104}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1338423413}
@@ -4407,7 +4407,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: ea74e95a8d426494eb00896dab3b39e5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2737443566785d3498acf75f8a847a60, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -13633,8 +13633,8 @@ MonoBehaviour:
   barScene: {fileID: 1137909975}
   streetScene: {fileID: 1293063477}
   outroScene: {fileID: 2098139122}
-  isStartSequenceFromBeginning: 0
-  <currentSequence>k__BackingField: 3
+  isStartSequenceFromBeginning: 1
+  <currentSequence>k__BackingField: 0
 --- !u!4 &1251363785
 Transform:
   m_ObjectHideFlags: 0
@@ -20066,7 +20066,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 30d53644d0dcf6e4e907663007a4da82, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c98f9307b5bb8c640a90e6e630c44b5d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
