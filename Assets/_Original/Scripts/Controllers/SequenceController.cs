@@ -39,13 +39,13 @@ public class SequenceController : MonoBehaviour
         barScene.gameObject.SetActive((scene == Sequence.bar_seq) ? true : false);
         streetScene.gameObject.SetActive((scene == Sequence.street_seq) ? true : false);
         outroScene.gameObject.SetActive((scene == Sequence.outro_seq) ? true : false);
-
+        UpdateSequence(scene);
     }
 
     public void UpdateSequence(Sequence setTo)
     {
         currentSequence = setTo;
-        StartThisScene(currentSequence);
+        
     }
 
 
