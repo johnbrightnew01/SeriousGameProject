@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+[DefaultExecutionOrder(-10)]
 public class UIController : MonoBehaviour
 {
     public enum UiType
@@ -60,6 +61,7 @@ public class UIController : MonoBehaviour
 
     public void ShowLoadingAnimation(float blackTime, float fadeTime = 0.5f)
     {
+        return; // delete this
         StartCoroutine(ShowFadeoutLoading(blackTime, fadeTime));
    
     }
