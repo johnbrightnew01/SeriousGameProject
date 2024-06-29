@@ -9,9 +9,14 @@ public class PlayerController : MonoBehaviour
 {
     [System.Serializable]
     public class EnemySpawnSequence
-    {
+    {    
+
         public List<CommonHandler> policeSpawnList;
         public List<Transform> policeSpawnPosList;
+        public List<float> spawnDelay;
+        public float zStartPos;
+        public float zEndPos;
+
     }
 
     public List<EnemySpawnSequence> policeSpawnSequenceList;
@@ -29,9 +34,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField, ReadOnly] private bool onStartSpawningEnemy = false;
     [SerializeField, ReadOnly] private int seqNo = 0;
     [SerializeField, ReadOnly] private int childNo = 0;
+    private bool isWaveSpawnnerRunning = false;
     private void Awake()
     {
         onStartSpawningEnemy = false;
+        isWaveSpawnnerRunning = false;
     }
     private void Start()
     {
@@ -61,22 +68,31 @@ public class PlayerController : MonoBehaviour
         {
             if (_enemyList.Count == 0 || _enemyList[_enemyList.Count-1]._healthHandler.remainHp <= 10f)
             {
-                SpawnNewEnemyPolice();
+                if (!isWaveSpawnnerRunning)
+                {
+                    StartCoroutine(SpawnNewEnemyPolice());
+                }
             }
         }
     }
 
-    private void SpawnNewEnemyPolice()
+    
+
+
+    IEnumerator SpawnNewEnemyPolice()
     {
+        isWaveSpawnnerRunning = true;
         if(seqNo <= policeSpawnSequenceList.Count - 1)
         {
             for (int i = 0; i < policeSpawnSequenceList[seqNo].policeSpawnList.Count; i++)
             {
+                yield return new WaitForSeconds(policeSpawnSequenceList[seqNo].spawnDelay[i]);
                 var plc = Instantiate(policeSpawnSequenceList[seqNo].policeSpawnList[i], policeSpawnSequenceList[seqNo].policeSpawnPosList[i].position, Quaternion.identity);
                 _enemyList.Add(plc);
             }
             seqNo++;
         }
+        isWaveSpawnnerRunning = false;
     }
 
 

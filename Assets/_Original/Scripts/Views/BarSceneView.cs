@@ -208,11 +208,11 @@ public class BarSceneView : MonoBehaviour
 
             Debug.Log("Segment 1 done");
 
-            currentPos.z = -3.41f;
+            currentPos.z = -3.61f;
             stormeHander.DoMoveToThisPos(currentPos, 2.5f);
             yield return new WaitForSeconds(2.8f);
-            currentPos.z = -2f;
-            stormeHander.DoMoveToThisPos(currentPos, 1.3f);
+            currentPos.z = -3f;
+            stormeHander.DoMoveToThisPos(currentPos, 0.7f);
             yield return new WaitForSeconds(1.3f);
             policeBot_1.anim.SetTrigger("push");
             yield return new WaitForSeconds(0.22f);

@@ -87,7 +87,7 @@ public class StreetSceneView : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         Controller.self.inputController.EnableInput();
-        //  Controller.self.playerController.StartSpawningEnemy();
+          Controller.self.playerController.StartSpawningEnemy();
         UIGamePlay.Instance.TogglePlayerHpPanel(true);
 
     }

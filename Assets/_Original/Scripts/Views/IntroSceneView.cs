@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.Video;
@@ -15,6 +14,7 @@ public class IntroSceneView : MonoBehaviour
     [SerializeField] private Transform angryPixelLogo;
     [SerializeField] private Transform theButtonPanel;
     [SerializeField] private Transform grid;
+    [SerializeField] private GameObject animatedPage;
 
 
     private void OnEnable()
@@ -24,7 +24,7 @@ public class IntroSceneView : MonoBehaviour
        // SoundManager.Instance.DoPlayBG();
         canvas.gameObject.SetActive(false);
         grid.gameObject.SetActive(false);
-
+        animatedPage.gameObject.SetActive(true);
         angryPixelLogo.gameObject.SetActive(false);
         theButtonPanel.gameObject.SetActive(false);
         OnStartTheScene();
@@ -76,6 +76,7 @@ public class IntroSceneView : MonoBehaviour
         angryPixelLogo.gameObject.SetActive(false);
         yield return new WaitForSeconds(0.5f);
         theButtonPanel.gameObject.SetActive(true);
+        animatedPage.gameObject.SetActive(false);
         grid.gameObject.SetActive(true);
     }
 

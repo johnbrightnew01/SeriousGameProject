@@ -10,7 +10,12 @@ public class SoundManager : MonoBehaviour
     public AudioSource thunderSound;
     public AudioSource barSound;
     public AudioSource streetSong;
-
+    public AudioSource silviaPunch;
+    public AudioSource silviaGotHit;
+    public AudioSource silviaBlock;
+    public AudioSource copPunch;
+    public AudioSource copGotHit;
+    public AudioSource copBlock;
     private void Awake()
     {
         if(Instance == null)
@@ -79,7 +84,7 @@ public class SoundManager : MonoBehaviour
 
     public void PlaySound(AudioSource audio, float startTime = 0f, float endTime = 0f, float volume = 1f, float pitch = 1f)
     {
-        Debug.Log("thunder");
+        
         if (true)
         {
             audio.pitch = pitch;

@@ -11,6 +11,7 @@ public class HealthHandler : MonoBehaviour
     [SerializeField] private Transform uiTargetPos;
     [SerializeField] private SpriteRenderer spRender;
     private bool isEffectRunning = false;
+ 
     public void InitializeHandler(CommonHandler cmnHandler)
     {
         commonHandler = cmnHandler;
@@ -43,9 +44,10 @@ public class HealthHandler : MonoBehaviour
         {           
             UIGamePlay.Instance.UpdatePlayerHP(  ( remainHp/ commonHandler.totalHealth));       
         }
-
-        if(remainHp <= 0)
+        DoPlayGotHitSound();
+        if (remainHp <= 0)
         {
+
             commonHandler.OnDead();
             if (hpUi != null)
             {
@@ -54,10 +56,27 @@ public class HealthHandler : MonoBehaviour
         }
         else
         {
+           
             HpReduceEffect();
             DoForceBackward(reduceFrom.transform.position.z - this.transform.position.z);
         }
     }
+
+    public void DoPlayGotHitSound()
+    {
+      
+        {
+            if (commonHandler.isPlayer)
+            {
+                SoundManager.Instance.PlaySound(SoundManager.Instance.silviaGotHit);
+            }
+            else
+            {
+                SoundManager.Instance.PlaySound(SoundManager.Instance.copGotHit);
+            }
+        }
+    }
+
 
     private void DoForceBackward(float dir)
     {

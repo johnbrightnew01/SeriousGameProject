@@ -55,7 +55,8 @@ public class CommonHandler : MonoBehaviour
     [SerializeField] float blockTime = 1f;
     [field: SerializeField, ReadOnly] public bool isBlocking { get; private set; }
     [field: SerializeField,ReadOnly] public bool isGettingForced { get; private set; }
-
+    [SerializeField]
+    private float backForce = 2f;
     private void Awake()
     {
         _attackHandler = GetComponent<AttackHandler>();
@@ -76,10 +77,10 @@ public class CommonHandler : MonoBehaviour
         if (isBlocking) return;
         isBlocking = true;
         anim.SetBool("block", true);
-        Invoke("RemoveBlock", blockTime);
+      //  Invoke("RemoveBlock", blockTime);
     }
 
-    private void RemoveBlock()
+    public void RemoveBlock()
     {
         anim.SetBool("block", false);
         isBlocking = false;
@@ -94,14 +95,14 @@ public class CommonHandler : MonoBehaviour
             isGettingForced = true;
             if(dir < 0)
             {
-                var calP = this.transform.position.z + 2f;
+                var calP = this.transform.position.z + backForce;
                 this.transform.DOMoveZ(calP, 0.4f).OnComplete(() => {
                     isGettingForced = false;
                 });
             }
             else
             {
-                var calP = this.transform.position.z - 2f;
+                var calP = this.transform.position.z - backForce;
                 this.transform.DOMoveZ(calP, 0.4f).OnComplete(() => {
                     isGettingForced = false;
                 });

@@ -44,6 +44,10 @@ public class InputController : MonoBehaviour
             isMoving = false; ;
             Controller.self.playerController._playerCommonHandler.DoBlockAttack();
         }
+        if (Input.GetKeyUp("e"))
+        {
+            Controller.self.playerController._playerCommonHandler.RemoveBlock();
+        }
         if (!isMoving)
         {
             Controller.self.playerController._playerCommonHandler.DoMove(PlayerDirection.none);

@@ -26,6 +26,8 @@ public class AttackHandler : MonoBehaviour
         isAttacking = true;
         { // trigger animation
             commonHandler.UpdateAnimator(PlayerAnimationType.punch);
+            DoPlayPunchSound();
+            
            
           //  commonHandler.DoAttackAnimation();
         }
@@ -84,12 +86,26 @@ public class AttackHandler : MonoBehaviour
         }
     }
 
-
+    public void DoPlayPunchSound()
+    {
+        if (currentTarget != null)
+        {
+            if (commonHandler.isPlayer)
+            {
+                SoundManager.Instance.PlaySound(SoundManager.Instance.silviaPunch);
+            }
+            else
+            {
+                SoundManager.Instance.PlaySound(SoundManager.Instance.copPunch);
+            }
+        }
+    }
 
 
     public void DoReduceOthersHP()
     {
         if (currentTarget == null) return;
+      //  DoPlayPunchSound();
         currentTarget._healthHandler.ReduceHealth(hitDamage, commonHandler);
         currentTarget = null;
     }

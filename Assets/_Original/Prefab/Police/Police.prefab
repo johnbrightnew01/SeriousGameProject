@@ -239,7 +239,7 @@ MonoBehaviour:
   enemyCommonHandler: {fileID: 0}
   attackFrequency: 1.5
   minAttackDist: 1.4
-  moveSpeed: 1
+  moveSpeed: 1.7
   deltaCounter: 0
   isRunningAway: 0
 --- !u!114 &45679978639002819
@@ -307,7 +307,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayer: 0
-  totalHealth: 100
+  totalHealth: 50
   _attackHandler: {fileID: 0}
   _healthHandler: {fileID: 0}
   _uiHandler: {fileID: 0}
@@ -323,6 +323,8 @@ MonoBehaviour:
   blockDeltaTime: 2
   blockTime: 1
   <isBlocking>k__BackingField: 0
+  <isGettingForced>k__BackingField: 0
+  backForce: 2
 --- !u!65 &2763052324732067383
 BoxCollider:
   m_ObjectHideFlags: 0
