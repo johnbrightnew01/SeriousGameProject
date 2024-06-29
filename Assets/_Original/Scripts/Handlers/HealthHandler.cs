@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,11 +6,11 @@ using UnityEngine;
 public class HealthHandler : MonoBehaviour
 {
     [ReadOnly, SerializeField] private CommonHandler commonHandler;
-    [ReadOnly, SerializeField] private float remainHp;
+    [field: ReadOnly, SerializeField] public float remainHp { get; private set; }
     [SerializeField, ReadOnly] public FloatingUI hpUi;
     [SerializeField] private Transform uiTargetPos;
-
-
+    [SerializeField] private SpriteRenderer spRender;
+    private bool isEffectRunning = false;
     public void InitializeHandler(CommonHandler cmnHandler)
     {
         commonHandler = cmnHandler;
@@ -27,7 +28,7 @@ public class HealthHandler : MonoBehaviour
     }
 
 
-    public void ReduceHealth(float reduceBy)
+    public void ReduceHealth(float reduceBy, CommonHandler reduceFrom)
     {
   
         if (commonHandler.isBlocking) return;
@@ -39,19 +40,42 @@ public class HealthHandler : MonoBehaviour
             hpUi.UpdateHp(remainHp/commonHandler.totalHealth);
         }
         if (commonHandler.isPlayer)
-        {
-           
+        {           
             UIGamePlay.Instance.UpdatePlayerHP(  ( remainHp/ commonHandler.totalHealth));       
         }
 
         if(remainHp <= 0)
         {
-            // dead
             commonHandler.OnDead();
             if (hpUi != null)
             {
                 hpUi.OnDead();
             }
         }
+        else
+        {
+            HpReduceEffect();
+            DoForceBackward(reduceFrom.transform.position.z - this.transform.position.z);
+        }
     }
+
+    private void DoForceBackward(float dir)
+    {
+        commonHandler.ToggleGettingForce(true, dir);
+    }
+
+    private void HpReduceEffect()
+    {
+        if (isEffectRunning) return;
+        isEffectRunning = true;
+        spRender.DOFade(0f, 0.08f).OnComplete(() =>
+        {
+            spRender.DOFade(1f, 0.08f).OnComplete(() =>
+            {
+                isEffectRunning = false;
+            });
+
+        });
+    }
+
 }

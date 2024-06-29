@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class UIGamePlay : MonoBehaviour
 {
+    [SerializeField] private GameObject playerHpPanel;
     [SerializeField] private Image playerHpBar;
 
     public static UIGamePlay Instance;
@@ -16,6 +17,12 @@ public class UIGamePlay : MonoBehaviour
         {
             Instance = this;
         }
+        TogglePlayerHpPanel(false);
+    }
+
+    public void TogglePlayerHpPanel(bool isEnable)
+    {
+        playerHpPanel.SetActive(isEnable);
     }
 
 

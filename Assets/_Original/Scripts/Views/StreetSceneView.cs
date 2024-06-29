@@ -1,7 +1,6 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class StreetSceneView : MonoBehaviour
@@ -13,11 +12,18 @@ public class StreetSceneView : MonoBehaviour
     [SerializeField] private List<Transform> stromePosList;
     [SerializeField] private List<CharacterData> otherCharDataList;
     [SerializeField] private List<Transform> playerPosList;
-
+    [SerializeField] private bool isJumpToFightScene;
     private void OnEnable()
     {
         Controller.self.cameraController.DoActiveVirtualCamera(Controller.self.cameraController.outsideCamera, false);
-        StartCoroutine(OnStartSegment());
+        if (!isJumpToFightScene)
+        {
+            StartCoroutine(OnStartSegment());
+        }
+        else
+        {
+            StartCoroutine(DirectJumpToFight());
+        }
     }
 
     IEnumerator OtherCharSPeech()
@@ -74,10 +80,27 @@ public class StreetSceneView : MonoBehaviour
         });
         yield return new WaitForSeconds(7.5f);
         player.GetComponent<PlayerView>().playerPopUpCanvas.gameObject.SetActive(true);
-        yield return new WaitForSeconds(3.5f);
+        yield return new WaitForSeconds(3f);
+        stormeAndPolic.gameObject.SetActive(false);
+        UIController.Instance.ShowLoadingAnimation(1f);
+        Controller.self.cameraController.DoActiveVirtualCamera(Controller.self.cameraController.fightCamera, false);
+        yield return new WaitForSeconds(0.5f);
+
+        Controller.self.inputController.EnableInput();
+        //  Controller.self.playerController.StartSpawningEnemy();
+        UIGamePlay.Instance.TogglePlayerHpPanel(true);
+
+    }
+
+    IEnumerator DirectJumpToFight()
+    {
+        stormeAndPolic.gameObject.SetActive(false);
+        player.transform.position = playerPosList[1].position;
+        Controller.self.cameraController.DoActiveVirtualCamera(Controller.self.cameraController.fightCamera, false);
+        yield return new WaitForSeconds(0.45f);
         Controller.self.inputController.EnableInput();
         Controller.self.playerController.StartSpawningEnemy();
-
+        UIGamePlay.Instance.TogglePlayerHpPanel(true);
     }
 
 

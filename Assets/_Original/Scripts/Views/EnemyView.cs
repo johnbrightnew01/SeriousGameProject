@@ -105,7 +105,7 @@ public class EnemyView : MonoBehaviour
         }
         else
         {
-            enemyCommonHandler.transform.Translate((enemyCommonHandler._attackHandler.currentTarget.transform.position - this.transform.position) * moveSpeed * Time.deltaTime);
+            enemyCommonHandler.transform.Translate((enemyCommonHandler._attackHandler.currentTarget.transform.position - this.transform.position).normalized * moveSpeed * Time.deltaTime);
           
         }
         enemyCommonHandler.UpdateAnimator(PlayerAnimationType.walk);

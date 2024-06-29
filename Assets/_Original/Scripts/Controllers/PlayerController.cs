@@ -1,27 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+
+
 [DefaultExecutionOrder(-98)]
 public class PlayerController : MonoBehaviour
 {
+    [System.Serializable]
+    public class EnemySpawnSequence
+    {
+        public List<CommonHandler> policeSpawnList;
+        public List<Transform> policeSpawnPosList;
+    }
+
+    public List<EnemySpawnSequence> policeSpawnSequenceList;
+
     [HideInInspector]
     public float timeCounter;
     public PlayerView _playerView;
     [SerializeField]private List<CommonHandler> orgPoliceList;
     public CommonHandler _playerCommonHandler;
     public List<CommonHandler> _enemyList;
-    [SerializeField] private List<Transform> policeSpawnPosList;
+  
     private int posCounter = 0;
     [SerializeField, ReadOnly] private int numberOfPoliceToSpawn = 5;
     [SerializeField] private float spawnDelta = 2f;
-
-
+    [SerializeField, ReadOnly] private bool onStartSpawningEnemy = false;
+    [SerializeField, ReadOnly] private int seqNo = 0;
+    [SerializeField, ReadOnly] private int childNo = 0;
+    private void Awake()
+    {
+        onStartSpawningEnemy = false;
+    }
     private void Start()
     {
       //  StartCoroutine(StartSpawning());
     }
 
-    IEnumerator StartSpawning()
+    IEnumerator StartSpawningOverTime()
     {
         int counter = 0;
         while (numberOfPoliceToSpawn > counter)
@@ -34,13 +51,41 @@ public class PlayerController : MonoBehaviour
 
     public void StartSpawningEnemy()
     {
-        StartCoroutine(StartSpawning());
+        //  StartCoroutine(StartSpawningOverTime());
+        onStartSpawningEnemy = true;
     }
+
+    private void Update()
+    {
+        if (onStartSpawningEnemy)
+        {
+            if (_enemyList.Count == 0 || _enemyList[_enemyList.Count-1]._healthHandler.remainHp <= 10f)
+            {
+                SpawnNewEnemyPolice();
+            }
+        }
+    }
+
+    private void SpawnNewEnemyPolice()
+    {
+        if(seqNo <= policeSpawnSequenceList.Count - 1)
+        {
+            for (int i = 0; i < policeSpawnSequenceList[seqNo].policeSpawnList.Count; i++)
+            {
+                var plc = Instantiate(policeSpawnSequenceList[seqNo].policeSpawnList[i], policeSpawnSequenceList[seqNo].policeSpawnPosList[i].position, Quaternion.identity);
+                _enemyList.Add(plc);
+            }
+            seqNo++;
+        }
+    }
+
+
 
 
     public void DoSpawnPolice(bool isSpawsRandomPos = false)
     {
-        var pos = policeSpawnPosList[Random.Range(0, policeSpawnPosList.Count)];
+        return;
+   /*     var pos = policeSpawnPosList[Random.Range(0, policeSpawnPosList.Count)];
         if (!isSpawsRandomPos)
         {
             posCounter++;
@@ -51,7 +96,7 @@ public class PlayerController : MonoBehaviour
             pos = policeSpawnPosList[posCounter];
         }
         var plc = Instantiate(orgPoliceList[Random.Range(0, orgPoliceList.Count)], pos.position, Quaternion.identity);
-        _enemyList.Add(plc);
+        _enemyList.Add(plc);*/
     }
 
 

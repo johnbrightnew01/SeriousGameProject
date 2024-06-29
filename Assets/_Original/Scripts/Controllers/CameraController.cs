@@ -13,7 +13,8 @@ public class CameraController : MonoBehaviour
     public CinemachineVirtualCamera playerCam;
     public CinemachineVirtualCamera barFreeCamera;
     public CinemachineVirtualCamera outsideCamera;
- 
+    public CinemachineVirtualCamera fightCamera;
+    
     
 
 
@@ -22,6 +23,7 @@ public class CameraController : MonoBehaviour
         playerCam.Priority = 0;
         barFreeCamera.Priority = 0;
         outsideCamera.Priority = 0;
+        fightCamera.Priority = 0;
         nextCam.Priority = 20;
 
     }

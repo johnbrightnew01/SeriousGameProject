@@ -14,7 +14,7 @@ public class AttackHandler : MonoBehaviour
     private RaycastHit hit;
     [SerializeField] private Collider raycastCollider;
 
-
+    bool isHitOther;
     public void InitializeHandler(CommonHandler cmnHandler)
     {
         commonHandler = cmnHandler;
@@ -47,34 +47,42 @@ public class AttackHandler : MonoBehaviour
 
     public void DoUpdateRayCastForTarget()
     {
+        return;
 
         if(Physics.BoxCast(raycastCollider.bounds.center, transform.localScale*0.5f, rayCastPos.forward, out hit,  rayCastPos.rotation, maxRayCastDist, mask))
         {
-          
+            isHitOther = true;
             currentTarget = hit.transform.GetComponent<CommonHandler>();
         }
-
-       /* {
-            if (Physics.Raycast(rayCastPos.position, rayCastPos.transform.forward, out hit, maxRayCastDist, mask))
-            {
-                Debug.DrawRay(rayCastPos.position, rayCastPos.transform.forward * hit.distance, Color.yellow);
-                if (hit.transform.TryGetComponent<CommonHandler>(out CommonHandler cmn))
-                {
-                    if (!cmn.isPlayer)
-                    {
-                        Debug.Log("Found the nemey");
-                    }
-                }
-            }
-            else
-            {
-                Debug.DrawRay(rayCastPos.position, rayCastPos.transform.forward * maxRayCastDist, Color.red);
-            }
-        }*/
-       
+        else
+        {
+            currentTarget = null;
+            isHitOther = false;
+        }
     }
 
-  
+ 
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (!commonHandler.isPlayer) return;
+        
+        if( other.gameObject.layer == 7)
+        {
+            currentTarget = other.transform.GetComponent<CommonHandler>();
+        }
+
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (!commonHandler.isPlayer) return;
+
+        if (other.gameObject.layer == 7)
+        {
+            currentTarget = null;
+        }
+    }
 
 
 
@@ -82,7 +90,8 @@ public class AttackHandler : MonoBehaviour
     public void DoReduceOthersHP()
     {
         if (currentTarget == null) return;
-        currentTarget._healthHandler.ReduceHealth(hitDamage);
+        currentTarget._healthHandler.ReduceHealth(hitDamage, commonHandler);
+        currentTarget = null;
     }
 
     public void OnAttackDone()

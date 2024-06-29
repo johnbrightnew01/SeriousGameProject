@@ -11,12 +11,15 @@ public class InteractiveIntroSceneView : MonoBehaviour
     [SerializeField] private List<string> textList;
     [Range(0.01f, 1.5f)]
     [SerializeField] private float textSpeed;
-    [SerializeField] private TextMeshProUGUI introText;
+    [SerializeField] private CanvasGroup introTextCanvasGroup;
+    [SerializeField] private GameObject bodyTextObj;
     [SerializeField] private TextMeshProUGUI bodyText;
     [SerializeField, ReadOnly] private bool initalIntroDone;
     [SerializeField, ReadOnly] private bool isTextDone;
     [SerializeField, ReadOnly] private bool isMouseButtonClicked;
+    [SerializeField] private GameObject arrow;
     private int counter = 0;
+
     private void OnEnable()
     {
         UIController.Instance.ToggleInteractiveIntroUI(true);
@@ -25,26 +28,37 @@ public class InteractiveIntroSceneView : MonoBehaviour
 
     private void OnDisable()
     {
-        UIController.Instance.ToggleInteractiveIntroUI(false);
-        
+        UIController.Instance.ToggleInteractiveIntroUI(false);        
     }
 
 
 
     IEnumerator OnStartSequence()
     {
-        StartTheIntroShit();
+        bodyTextObj.SetActive(false);
+        ToggleIntoData(true);
         yield return new WaitUntil(() => initalIntroDone);
+        yield return new WaitForSeconds(3f);
+        ToggleIntoData(false);
+
+        yield return new WaitUntil(() => initalIntroDone);
+        introTextCanvasGroup.gameObject.SetActive(false);
+
+        bodyTextObj.SetActive(true);
         for (int i = 0; i < textList.Count; i++)
         {
+            
+            arrow.gameObject.SetActive(textList.Count - 1 != i);
+            
             isTextDone = false;
             var newCo = StartCoroutine(ShowThisText(i));
             yield return new WaitUntil(() => isMouseButtonClicked);
             isMouseButtonClicked = false;           
             StopCoroutine(newCo);
+            bodyText.text = "";
             yield return new WaitForEndOfFrame();
         }
-        yield return new WaitUntil(() => isMouseButtonClicked);
+       // yield return new WaitUntil(() => isMouseButtonClicked);
         Controller.self.sequenceController.StartThisScene(Sequence.bar_seq);
 
     }
@@ -90,15 +104,29 @@ public class InteractiveIntroSceneView : MonoBehaviour
     }
 
 
-    private void StartTheIntroShit()
+    private void ToggleIntoData(bool isShow, float time = 0.5f)
     {
-        var Targtclr = introText.color;
-        var starCol = new Color(Targtclr.r, Targtclr.g, Targtclr.b, 0);
-        introText.color = starCol;
-        introText.DOColor(Targtclr, 1f).SetEase(Ease.Linear).OnComplete(() =>
+        if (isShow)
         {
-            initalIntroDone = true;
-        });
+            initalIntroDone = false;
+            introTextCanvasGroup.alpha = 0;
+            introTextCanvasGroup.DOFade(1f, time).SetEase(Ease.Linear).OnComplete(() =>
+            {
+                initalIntroDone = true;
+
+            });
+        }
+        else
+        {
+            initalIntroDone = false;
+            introTextCanvasGroup.alpha = 1;
+            introTextCanvasGroup.DOFade(0, time).SetEase(Ease.Linear).OnComplete(() =>
+            {
+                initalIntroDone = true;
+
+            });
+        }
+       
     }
 
 }

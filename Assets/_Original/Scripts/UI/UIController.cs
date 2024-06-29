@@ -61,7 +61,7 @@ public class UIController : MonoBehaviour
 
     public void ShowLoadingAnimation(float blackTime, float fadeTime = 0.5f)
     {
-        return; // delete this
+     
         StartCoroutine(ShowFadeoutLoading(blackTime, fadeTime));
    
     }

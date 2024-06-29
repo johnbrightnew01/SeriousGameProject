@@ -239,7 +239,7 @@ MonoBehaviour:
   enemyCommonHandler: {fileID: 0}
   attackFrequency: 1.5
   minAttackDist: 1.4
-  moveSpeed: 0.36
+  moveSpeed: 1
   deltaCounter: 0
   isRunningAway: 0
 --- !u!114 &45679978639002819
@@ -277,9 +277,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   commonHandler: {fileID: 0}
-  remainHp: 0
+  <remainHp>k__BackingField: 0
   hpUi: {fileID: 0}
   uiTargetPos: {fileID: 3024932490104148202}
+  spRender: {fileID: 6523028759730931075}
 --- !u!114 &7212084845609232033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,8 +342,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.44041654, y: 0.51627576, z: 0.6595586}
-  m_Center: {x: -0.040953085, y: -0.0030768514, z: 0.106907725}
+  m_Size: {x: 0.7137764, y: 0.65354383, z: 0.9336419}
+  m_Center: {x: -0.040953085, y: 0.0655572, z: 0.24394917}
 --- !u!114 &246738634089111233
 MonoBehaviour:
   m_ObjectHideFlags: 0

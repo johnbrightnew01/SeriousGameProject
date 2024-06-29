@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using System.Timers;
@@ -53,6 +54,7 @@ public class CommonHandler : MonoBehaviour
     [SerializeField] float blockDeltaTime = 2f;
     [SerializeField] float blockTime = 1f;
     [field: SerializeField, ReadOnly] public bool isBlocking { get; private set; }
+    [field: SerializeField,ReadOnly] public bool isGettingForced { get; private set; }
 
     private void Awake()
     {
@@ -83,6 +85,30 @@ public class CommonHandler : MonoBehaviour
         isBlocking = false;
     }
 
+
+    public void ToggleGettingForce(bool isForce, float dir)
+    {
+        if (isGettingForced) return;
+        if (isForce)
+        {
+            isGettingForced = true;
+            if(dir < 0)
+            {
+                var calP = this.transform.position.z + 2f;
+                this.transform.DOMoveZ(calP, 0.4f).OnComplete(() => {
+                    isGettingForced = false;
+                });
+            }
+            else
+            {
+                var calP = this.transform.position.z - 2f;
+                this.transform.DOMoveZ(calP, 0.4f).OnComplete(() => {
+                    isGettingForced = false;
+                });
+            }
+        }
+        
+    }
 
 
     public void DoMove(PlayerDirection dir)
@@ -132,8 +158,8 @@ public class CommonHandler : MonoBehaviour
         }
 
         var pp = _playerRb.position;
-        pp.y = Mathf.Clamp(pp.y, -0.59f, 1.36f);
-        pp.z = Mathf.Clamp(pp.z, -24f, -6f);
+        pp.y = Mathf.Clamp(pp.y, -0.59f, 0.84f);
+        pp.z = Mathf.Clamp(pp.z, -24f, 16f);
         _playerRb.position = pp;
 
         
