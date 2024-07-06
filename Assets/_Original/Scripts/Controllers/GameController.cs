@@ -53,7 +53,7 @@ public class GameController : MonoBehaviour
         GlobalData.isInGameMenu = false;
         GlobalData.isLevelStart = false;
 
-       // UI.instance.ShowUI(UI.instance.uiGameOver, false);
+        UIController.Instance.ShowUI(UIController.UiType.gameOverUI, true);
         GlobalData.isGameOver = true;
     }
 

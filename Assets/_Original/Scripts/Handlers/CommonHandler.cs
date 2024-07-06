@@ -57,6 +57,8 @@ public class CommonHandler : MonoBehaviour
     [field: SerializeField,ReadOnly] public bool isGettingForced { get; private set; }
     [SerializeField]
     private float backForce = 2f;
+    [SerializeField, ReadOnly] private float playerFromPos = -24;
+    [SerializeField, ReadOnly] private float playerToPos = 15;
     private void Awake()
     {
         _attackHandler = GetComponent<AttackHandler>();
@@ -111,6 +113,12 @@ public class CommonHandler : MonoBehaviour
         
     }
 
+    public void UpdatePlayerWavePosition(float from, float to)
+    {
+        Debug.Log("seq no " + from + " " + to); ;
+        playerFromPos = from;
+        playerToPos = to;
+    }
 
     public void DoMove(PlayerDirection dir)
     {
@@ -160,11 +168,10 @@ public class CommonHandler : MonoBehaviour
 
         var pp = _playerRb.position;
         pp.y = Mathf.Clamp(pp.y, -0.59f, 0.84f);
-        pp.z = Mathf.Clamp(pp.z, -24f, 16f);
-        _playerRb.position = pp;
-
-        
-
+      //  pp.y = Mathf.Clamp(pp.y, playerFromPos, playerToPos);
+    //    pp.z = Mathf.Clamp(pp.z, -24f, 16f);
+        pp.z = Mathf.Clamp(pp.z, playerFromPos, playerToPos);
+        _playerRb.position = pp;  
 
     }
 
@@ -173,7 +180,6 @@ public class CommonHandler : MonoBehaviour
         if (isDead) return;
         anim.SetBool(_runHash, false);
         anim.SetBool(_attackHash, true);
-
     }
 
 
@@ -191,6 +197,10 @@ public class CommonHandler : MonoBehaviour
             Controller.self.playerController.RemoveThisEnemy(this);
             anim.speed = 3f;
             Destroy(this.gameObject, 5f);
+        }
+        else
+        {
+            Controller.self.levelController.DoGameOver(false);
         }
     }
    

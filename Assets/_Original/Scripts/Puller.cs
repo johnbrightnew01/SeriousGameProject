@@ -168,7 +168,7 @@ public class Puller : MonoBehaviour
 
     private void AddRandomGunObject()
     {
-        string lastGun = PlayerPrefs.GetString(LevelController.LAST_GUN_ID);
+        string lastGun = PlayerPrefs.GetString("LAST_GUN_ID");
         for (int i = 9; i < productList.Count; i++)
         {
             if (productList[i].ID != lastGun)

@@ -34,6 +34,11 @@ public class UIController : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        ShowUI(UiType.gamePlayUI,true);
+    }
+
 
     public void ToggleInteractiveIntroUI(bool isEanble)
     {
@@ -42,15 +47,12 @@ public class UIController : MonoBehaviour
 
     public void ShowUI(UiType type, bool isAnimation, float blendTime = 1f)
     {
-        if (isAnimation)
-        {
+        uiMenu.gameObject.SetActive((type == UiType.menuUI) ? true : false); 
+        uiGamePlay.gameObject.SetActive((type == UiType.gamePlayUI) ? true : false); 
+        uiGameOver.gameObject.SetActive((type == UiType.gameOverUI) ? true : false); 
+       
 
-        }
-
-        if (type == UiType.menuUI)
-        {
-
-        }
+       
     }
 
 
