@@ -16,6 +16,8 @@ public class SoundManager : MonoBehaviour
     public AudioSource copPunch;
     public AudioSource copGotHit;
     public AudioSource copBlock;
+
+    public AudioSource outroSound;
     private void Awake()
     {
         if(Instance == null)
@@ -76,6 +78,24 @@ public class SoundManager : MonoBehaviour
     }
 
 
+    public void DoFadeTogglePause(AudioSource audio, bool isPause)
+    {
+        if (isPause)
+        {
+            audio.DOFade(0, 0.7f).OnComplete(() =>
+            {
+                audio.Pause();
+            });
+        }
+        else
+        {
+            audio.Play();
+
+            audio.DOFade(1f, 0.7f);
+        }
+    }
+
+
     public void DoPlayBG()
     {
     //   bgAudio.Play();
@@ -83,8 +103,7 @@ public class SoundManager : MonoBehaviour
     }
 
     public void PlaySound(AudioSource audio, float startTime = 0f, float endTime = 0f, float volume = 1f, float pitch = 1f)
-    {
-        
+    {        
         if (true)
         {
             audio.pitch = pitch;
@@ -97,10 +116,8 @@ public class SoundManager : MonoBehaviour
             }
             else
             {
-
                 audio.Play();
             }
-
         }
     }
 

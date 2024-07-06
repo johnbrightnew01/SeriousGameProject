@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class OutroSceneView : MonoBehaviour
 {
+    [SerializeField] private GameObject room0;
     [SerializeField] private GameObject room1;
     [SerializeField] private GameObject room1Door;
     [Space(10)]
@@ -12,6 +13,8 @@ public class OutroSceneView : MonoBehaviour
     [SerializeField] private List<GameObject> room2TriggerList;
     [SerializeField] private GameObject room2_Video_page;
     [SerializeField] private GameObject room2_Info_page;
+    [SerializeField] private GameObject room2_Info2_page;
+
     [SerializeField] private List<GameObject> room2_info_picList;
     [Space(10)]
     [SerializeField] private GameObject room3;
@@ -28,7 +31,13 @@ public class OutroSceneView : MonoBehaviour
     private void OnEnable()
     {
         currentRoomNo = 1;
+        room0.gameObject.SetActive(true);
+        room1.gameObject.SetActive(true);
+        room2.gameObject.SetActive(false);
+        room3.gameObject.SetActive(false);
+        room1Door.gameObject.SetActive(false);
         interactiveMouse.gameObject.SetActive(false);
+      //  SoundManager.Instance.streetSong.Stop();
     }
 
     private void Update()
@@ -36,6 +45,8 @@ public class OutroSceneView : MonoBehaviour
         var pointerPos = Input.mousePosition;
         mouseCursor.transform.position = new Vector3(pointerPos.x, pointerPos.y, 0);
     }
+
+    
 
     public void OnPointerEnter()
     {
@@ -64,6 +75,13 @@ public class OutroSceneView : MonoBehaviour
         room2.SetActive(true);
         room3.SetActive(false);
     }
+
+    public void GotoMeuseum()
+    {
+        room0.gameObject.SetActive(false);
+        room1.gameObject.SetActive(true);
+        SoundManager.Instance.PlaySound(SoundManager.Instance.outroSound);
+    }
     
     public void OpenRoom3()
     {
@@ -88,6 +106,8 @@ public class OutroSceneView : MonoBehaviour
         room3InfoList[infoPanelNumber].gameObject.SetActive(true);
     }
 
+  
+
     public void ReturenToRoom3()
     {
         room1.SetActive(false);
@@ -111,16 +131,27 @@ public class OutroSceneView : MonoBehaviour
 
     }   
 
+
+
     public void Room2PosterPage_OnMouseClick()
     {
         room2_Video_page.gameObject.SetActive(false);
         room2_Info_page.gameObject.SetActive(true);
     }
 
+    public void Room2PosterPage2_OnMouseClick()
+    {
+        room2_Video_page.gameObject.SetActive(false);
+        room2_Info2_page.gameObject.SetActive(true);
+        room2_Info_page.gameObject.SetActive(false);
+    }
+
+
     public void ReturnToRoom2()
     {
         room2_Video_page.gameObject.SetActive(false);
         room2_Info_page.gameObject.SetActive(false);
+        room2_Info2_page.gameObject.SetActive(false);
         ToggleInteractiveTrigger(room2TriggerList, true);
     }
 
