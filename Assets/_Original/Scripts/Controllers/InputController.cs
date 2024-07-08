@@ -15,6 +15,7 @@ public class InputController : MonoBehaviour
     }
     void FixedUpdate()
     {
+        if (Controller.self.playerController.isGettingReadyForWave) return;
         if (Controller.self.sequenceController.currentSequence != Sequence.street_seq) return;
         if (!isTakeInput) return;
         isMoving = false;

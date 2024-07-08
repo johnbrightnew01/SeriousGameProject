@@ -36,6 +36,7 @@ public enum PlayerAnimationType
 public class CommonHandler : MonoBehaviour
 {
     [field: SerializeField] public bool isPlayer;
+    public bool isThisEnemyBoss;
     [field: SerializeField] public float totalHealth = 100f;
     [ReadOnly] public AttackHandler _attackHandler;
     [ReadOnly] public HealthHandler _healthHandler;
@@ -82,6 +83,14 @@ public class CommonHandler : MonoBehaviour
         isAutoMove = false;
     }
 
+    private void Start()
+    {
+        if (isThisEnemyBoss)
+        {
+            Controller.self.playerController.isEnemyBossDead = false;
+        }
+    }
+
     public void DoBlockAttack()
     {
         if (isBlocking) return;
@@ -122,19 +131,47 @@ public class CommonHandler : MonoBehaviour
     }
 
     public void UpdatePlayerWavePosition(float from, float to)
-    {
-        Debug.Log("seq no " + from + " " + to + " before "); 
+    {       
         targetFromPos = from;
         targetToPos = to;
+        var cntre = (targetFromPos + targetToPos) / 2f;
+        if (cntre > transform.position.z)
+        {
+            Controller.self.playerController.GetReadyForWave(true);
+        }
+        Debug.Log("TargetF currentP 1 " + " targ from Pos " + playerFromPos);
+
+    }
+
+    private void LateUpdate()
+    {
+        if (Controller.self.playerController.isGettingReadyForWave && isPlayer)
+        {
+            var cntre = (targetFromPos + targetToPos) / 2f;
+            if (cntre >= transform.position.z)
+            {
+                DoMove(PlayerDirection.left, true);
+                Debug.Log("TargetF currentP 2 " + transform.position.z);
+
+            }
+            else
+            {
+                Controller.self.playerController.GetReadyForWave(false);
+                Debug.Log("TargetF currentP 3 " + transform.position.z + " targ3t " + targetFromPos);
+                playerFromPos = targetFromPos;
+                playerToPos = targetToPos;
+            }
+        }
+        
     }
 
 
-    
 
 
-    public void DoMove(PlayerDirection dir)
+
+    public void DoMove(PlayerDirection dir, bool isOverride = false)
     {
-
+        if (Controller.self.levelController.isGameOver) return;
         if (isBlocking && dir != PlayerDirection.none)
         {
             RemoveBlock();
@@ -179,20 +216,30 @@ public class CommonHandler : MonoBehaviour
             UpdateAnimator(PlayerAnimationType.walk);
         }
 
+
+
         var pp = _playerRb.position;
         pp.y = Mathf.Clamp(pp.y, -0.59f, 0.84f);
-        //   pp.z = Mathf.Clamp(pp.z, -24f, 16f);
-        playerFromPos = targetFromPos;
-        if(targetFromPos > this.transform.position.z)
+
+
+        if (!isOverride)
         {
-            playerFromPos = this.transform.position.z;
+            if (targetFromPos > this.transform.position.z)
+            {
+                playerFromPos = this.transform.position.z;
+            }
+            else
+            {
+                playerFromPos = targetFromPos;
+            }
+
+
+            pp.z = Mathf.Clamp(pp.z, playerFromPos, playerToPos);
         }
-        else
-        {
-            playerFromPos = targetFromPos;
-        }
-        pp.z = Mathf.Clamp(pp.z, playerFromPos, playerToPos);
-        _playerRb.position = pp;  
+
+ 
+       
+        _playerRb.position = pp;
 
     }
 
@@ -229,6 +276,12 @@ public class CommonHandler : MonoBehaviour
         {
             Controller.self.levelController.DoGameOver(false);
         }
+
+        if (isThisEnemyBoss)
+        {
+            Controller.self.playerController.isEnemyBossDead = true;
+        }
+
     }
    
 

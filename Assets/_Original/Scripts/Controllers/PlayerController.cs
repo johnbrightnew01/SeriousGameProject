@@ -11,8 +11,7 @@ public class PlayerController : MonoBehaviour
         public List<CommonHandler> policeSpawnList;
         public List<Transform> policeSpawnPosList;
         public List<float> spawnDelay;
-        public float zStartPos;
-        public float zEndPos;
+     
     }
 
     [System.Serializable]
@@ -23,10 +22,7 @@ public class PlayerController : MonoBehaviour
         public float zEndPos;
     }
 
-    public List<Wave> waveList;
-    [SerializeField, ReadOnly] private int waveNum = 1;
-    public List<EnemySpawnSequence> policeSpawnSequenceList;
-    
+    public List<Wave> waveList;  
 
     [HideInInspector]
     public float timeCounter;
@@ -40,9 +36,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField, ReadOnly] private int numberOfPoliceToSpawn = 5;
     [SerializeField] private float spawnDelta = 2f;
     [SerializeField, ReadOnly] private bool onStartSpawningEnemy = false;
+    [SerializeField, ReadOnly] private int waveNo = 0;
     [SerializeField, ReadOnly] private int seqNo = 0;
+
     [SerializeField, ReadOnly] private int childNo = 0;
     private bool isWaveSpawnnerRunning = false;
+    [field: ReadOnly, SerializeField] public bool isGettingReadyForWave { get; private set; } = false;
+    [SerializeField, ReadOnly] public bool isEnemyBossDead = false;
 
 
     private void Awake()
@@ -50,6 +50,8 @@ public class PlayerController : MonoBehaviour
         onStartSpawningEnemy = false;
         isWaveSpawnnerRunning = false;
         seqNo = 0;
+        isGettingReadyForWave = false;
+        isEnemyBossDead = false;
     }
     private void Start()
     {
@@ -74,13 +76,18 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(CheckForGameOver());
     }
 
+    public void GetReadyForWave(bool isGettingReady) 
+    {
+        isGettingReadyForWave = isGettingReady;
+    }
+
     private void Update()
     {
         if (onStartSpawningEnemy)
         {
-            if (_enemyList.Count == 0 || _enemyList[_enemyList.Count-1]._healthHandler.remainHp <= 10f)
+            if (_enemyList.Count == 0 /*|| _enemyList[_enemyList.Count-1]._healthHandler.remainHp <= 10f*/)
             {
-                if (!isWaveSpawnnerRunning)
+                if (!isWaveSpawnnerRunning && waveNo < waveList.Count)
                 {
                     StartCoroutine(SpawnNewEnemyPolice());
                 }
@@ -91,13 +98,14 @@ public class PlayerController : MonoBehaviour
     IEnumerator CheckForGameOver()
     {
         bool isGameOver = false;
+        yield return null;
         while (!isGameOver)
         {
             yield return new WaitForSeconds(0.5f);
-            if (seqNo >= policeSpawnSequenceList.Count && _enemyList.Count == 0)
+            if (waveNo >= waveList.Count && _enemyList.Count == 0)
             {
                 yield return new WaitForSeconds(2f);
-                if (seqNo >= policeSpawnSequenceList.Count && _enemyList.Count == 0)
+                if (waveNo >= waveList.Count && _enemyList.Count == 0)
                 {
                     isGameOver = true;
                     Controller.self.levelController.DoGameOver(true);
@@ -111,21 +119,44 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator SpawnNewEnemyPolice()
     {
-        isWaveSpawnnerRunning = true;
-        Debug.Log("seq no " + seqNo);
 
-        _playerCommonHandler.UpdatePlayerWavePosition(policeSpawnSequenceList[seqNo].zStartPos, policeSpawnSequenceList[seqNo].zEndPos);
-        if(seqNo <= policeSpawnSequenceList.Count - 1)
+      
+
+        isWaveSpawnnerRunning = true;
+        yield return null;
+        _playerCommonHandler.UpdatePlayerWavePosition(waveList[waveNo].zStartPos, waveList[waveNo].zEndPos);
+        yield return null;
+        Controller.self.cameraController.DoSetWaveCam();
+        
+       
+      //  UIController.Instance.ShowLoadingAnimation(1f);
+
+
+        yield return new WaitUntil(() => !isGettingReadyForWave);
+        UIGamePlay.Instance.ShowWaveText(waveNo + 1, 5f);
+
+        Controller.self.cameraController.ResetCustomeThing();
+        seqNo = 0;
+        if (seqNo <= waveList[waveNo].policeSpawnSequence.Count - 1)
         {
-            for (int i = 0; i < policeSpawnSequenceList[seqNo].policeSpawnList.Count; i++)
+            yield return null;
+            for (int i = 0; i < waveList[waveNo].policeSpawnSequence[seqNo].policeSpawnList.Count; i++)
             {
-                yield return new WaitForSeconds(policeSpawnSequenceList[seqNo].spawnDelay[i]);
-                var plc = Instantiate(policeSpawnSequenceList[seqNo].policeSpawnList[i], policeSpawnSequenceList[seqNo].policeSpawnPosList[i].position, Quaternion.identity);
+                yield return new WaitForSeconds(waveList[waveNo].policeSpawnSequence[seqNo].spawnDelay[i]);
+                var plc = Instantiate(waveList[waveNo].policeSpawnSequence[seqNo].policeSpawnList[i], waveList[waveNo].policeSpawnSequence[seqNo].policeSpawnPosList[i].position, Quaternion.identity);
                 _enemyList.Add(plc);
+                if (isEnemyBossDead || Controller.self.levelController.isGameOver)
+                {
+                    waveNo++;
+                    isWaveSpawnnerRunning = false;
+                    yield break;
+                }
             }
             seqNo++;
         }
+        waveNo++;
         isWaveSpawnnerRunning = false;
+    
     }
 
 

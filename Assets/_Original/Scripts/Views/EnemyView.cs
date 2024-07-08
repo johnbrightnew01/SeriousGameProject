@@ -19,6 +19,7 @@ public class EnemyView : MonoBehaviour
 
     private void Update()
     {
+        if (Controller.self.levelController.isGameOver) return;
         if ( Controller.self.sequenceController.currentSequence != Sequence.street_seq) return;
         if (enemyCommonHandler == null) return;
 

@@ -41,7 +41,7 @@ public class LevelController : MonoBehaviour
     
     [field: SerializeField, Space, Space]
     public int maxNumOfUpgradeForFireRate { get; private set; }
-
+    [field: SerializeField, ReadOnly] public bool isGameOver { get; private set; } = false;
 
     [field: SerializeField]
     public int maxNumfoUpgradeForBulletDamage { get; private set; }
@@ -93,6 +93,7 @@ public class LevelController : MonoBehaviour
 
     public void DoGameOver(bool isWin)
     {
+        isGameOver = true;
         if (!isWin)
         {
         

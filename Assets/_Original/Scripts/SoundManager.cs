@@ -92,7 +92,10 @@ public class SoundManager : MonoBehaviour
         }
         else
         {
-            audio.Play();
+            if (!audio.isPlaying)
+            {
+                audio.Play();
+            }
 
             audio.DOFade(1f, 0.7f);
         }
