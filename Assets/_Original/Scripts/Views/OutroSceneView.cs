@@ -37,7 +37,7 @@ public class OutroSceneView : MonoBehaviour
         room3.gameObject.SetActive(false);
         room1Door.gameObject.SetActive(false);
         interactiveMouse.gameObject.SetActive(false);
-      //  SoundManager.Instance.streetSong.Stop();
+        SoundManager.Instance.streetSong.Stop();
     }
 
     private void Update()
@@ -121,6 +121,7 @@ public class OutroSceneView : MonoBehaviour
 
         room2.SetActive(false);
         room3.SetActive(true);
+        SoundManager.Instance.DoFadeTogglePause(SoundManager.Instance.outroSound, false);
     }
 
 
@@ -153,6 +154,7 @@ public class OutroSceneView : MonoBehaviour
         room2_Info_page.gameObject.SetActive(false);
         room2_Info2_page.gameObject.SetActive(false);
         ToggleInteractiveTrigger(room2TriggerList, true);
+        SoundManager.Instance.DoFadeTogglePause(SoundManager.Instance.outroSound, false);
     }
 
     private void ToggleInteractiveTrigger(List<GameObject> list, bool isEnable)

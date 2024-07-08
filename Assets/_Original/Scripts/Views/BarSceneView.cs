@@ -72,6 +72,7 @@ public class BarSceneView : MonoBehaviour
 
     private void OnEnable()
     {
+        SoundManager.Instance.StopThisSound(SoundManager.Instance.interactiveSoundBackground);
         storme.transform.position = storme_initialPos.position;
         police1.transform.position = police_1_initialPos.position;
         police2.transform.position = police_2_initialPos.position;

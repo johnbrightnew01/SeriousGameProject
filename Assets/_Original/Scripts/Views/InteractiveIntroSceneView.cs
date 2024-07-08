@@ -24,6 +24,7 @@ public class InteractiveIntroSceneView : MonoBehaviour
     {
         UIController.Instance.ToggleInteractiveIntroUI(true);
         StartCoroutine(OnStartSequence());
+        SoundManager.Instance.PlaySound(SoundManager.Instance.interactiveSoundBackground, 0,0, 0.671f);
     }
 
     private void OnDisable()

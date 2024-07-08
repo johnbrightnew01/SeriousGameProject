@@ -15,9 +15,18 @@ public class PlayerController : MonoBehaviour
         public float zEndPos;
     }
 
+    [System.Serializable]
+    public class Wave
+    {
+        public List<EnemySpawnSequence> policeSpawnSequence;
+        public float zStartPos;
+        public float zEndPos;
+    }
 
+    public List<Wave> waveList;
     [SerializeField, ReadOnly] private int waveNum = 1;
     public List<EnemySpawnSequence> policeSpawnSequenceList;
+    
 
     [HideInInspector]
     public float timeCounter;

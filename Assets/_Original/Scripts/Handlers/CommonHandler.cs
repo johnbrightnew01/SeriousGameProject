@@ -62,7 +62,7 @@ public class CommonHandler : MonoBehaviour
 
     [SerializeField, ReadOnly] private float targetFromPos;
     [SerializeField, ReadOnly] private float targetToPos;
-
+    [SerializeField, ReadOnly] private bool isAutoMove = false;
 
     private void Awake()
     {
@@ -77,6 +77,9 @@ public class CommonHandler : MonoBehaviour
 
         anim = GetComponentInChildren<Animator>();
         _playerRb = GetComponent<Rigidbody>();
+        playerFromPos = -24f;
+        playerToPos = 15f;
+        isAutoMove = false;
     }
 
     public void DoBlockAttack()
@@ -126,9 +129,12 @@ public class CommonHandler : MonoBehaviour
     }
 
 
+    
+
 
     public void DoMove(PlayerDirection dir)
     {
+
         if (isBlocking && dir != PlayerDirection.none)
         {
             RemoveBlock();
@@ -174,8 +180,17 @@ public class CommonHandler : MonoBehaviour
         }
 
         var pp = _playerRb.position;
-        pp.y = Mathf.Clamp(pp.y, -0.59f, 0.84f); 
-    //    pp.z = Mathf.Clamp(pp.z, -24f, 16f);
+        pp.y = Mathf.Clamp(pp.y, -0.59f, 0.84f);
+        //   pp.z = Mathf.Clamp(pp.z, -24f, 16f);
+        playerFromPos = targetFromPos;
+        if(targetFromPos > this.transform.position.z)
+        {
+            playerFromPos = this.transform.position.z;
+        }
+        else
+        {
+            playerFromPos = targetFromPos;
+        }
         pp.z = Mathf.Clamp(pp.z, playerFromPos, playerToPos);
         _playerRb.position = pp;  
 

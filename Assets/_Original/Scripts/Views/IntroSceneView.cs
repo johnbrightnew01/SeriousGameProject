@@ -11,6 +11,7 @@ public class IntroSceneView : MonoBehaviour
 
     [SerializeField] private float thunderSoundTimeBefore = 20f;
     [SerializeField] private float thunderSoundTimeAfter = 10f;
+    [SerializeField] private float afterVGATime = 5f;
     [SerializeField] private Transform angryPixelLogo;
     [SerializeField] private Transform theButtonPanel;
     [SerializeField] private Transform grid;
@@ -63,18 +64,18 @@ public class IntroSceneView : MonoBehaviour
         // Black screen animation
 
       //  this.gameObject.SetActive(false);
+
     }
 
     IEnumerator StartTheSequence()
-    {
-     
+    {     
         SoundManager.Instance.PlaySound(SoundManager.Instance.thunderSound, 4.20f);
         yield return new WaitForSeconds(thunderSoundTimeBefore);
         angryPixelLogo.gameObject.SetActive(true);
         yield return new WaitForSeconds(thunderSoundTimeAfter);
         SoundManager.Instance.thunderSound.Stop();
         angryPixelLogo.gameObject.SetActive(false);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(afterVGATime);
         theButtonPanel.gameObject.SetActive(true);
         animatedPage.gameObject.SetActive(false);
         grid.gameObject.SetActive(true);

@@ -2,7 +2,7 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[DefaultExecutionOrder(-99)]
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance;
@@ -18,6 +18,9 @@ public class SoundManager : MonoBehaviour
     public AudioSource copBlock;
 
     public AudioSource outroSound;
+    public AudioSource interactiveSoundBackground;
+
+
     private void Awake()
     {
         if(Instance == null)
@@ -120,6 +123,10 @@ public class SoundManager : MonoBehaviour
             }
         }
     }
-
+     
+    public void StopThisSound(AudioSource src)
+    {
+        src.Stop();
+    }
 
 }
