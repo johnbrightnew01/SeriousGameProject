@@ -51,7 +51,7 @@ public class BarSceneView : MonoBehaviour
     [SerializeField] private Transform storme_Pos_Left;
     [SerializeField] private Transform storme_Pos_right;
     [SerializeField, ReadOnly] private bool onPosition;
-    [SerializeField, ReadOnly] private bool isMoveLeft = false;
+
     [SerializeField, ReadOnly] private bool isTakeInput = false;
     [SerializeField] private float maxDistToTrigger = 1f;
     [SerializeField, ReadOnly] private float currentDist;
@@ -59,7 +59,8 @@ public class BarSceneView : MonoBehaviour
     [SerializeField] private Canvas canvas;
     [SerializeField] private Image fadeImage;
 
-
+    [SerializeField, ReadOnly] private bool isMovedToLeft = false;
+    [SerializeField, ReadOnly] private bool isMovedToRight = false;
 
     private void Awake()
     {
@@ -86,53 +87,51 @@ public class BarSceneView : MonoBehaviour
 
     private void Update()
     {
-        
-        if (!isTakeInput) return;
+
+        if (!isTakeInput)
+        {
+           
+            return;
+        }
         if (Input.GetKey("a"))
         {
-            stormeHander.gameObject.transform.Translate(Vector3.forward * 5f * Time.deltaTime);
+            stormeHander.gameObject.transform.Translate(Vector3.forward * 1.5f * Time.deltaTime);
             stormeHander.transform.GetChild(0).transform.rotation = Quaternion.Euler(0, 0f, 0);
             stormeHander.anim.SetBool("run", true);
         }
         else if (Input.GetKey("d"))
         {
-            stormeHander.gameObject.transform.Translate(Vector3.forward * -5f * Time.deltaTime);
+            stormeHander.gameObject.transform.Translate(Vector3.forward * -1.5f * Time.deltaTime);
             stormeHander.transform.GetChild(0).transform.rotation = Quaternion.Euler(0, 180, 0);
             stormeHander.anim.SetBool("run", true);
         }
         else
         {
             stormeHander.anim.SetBool("run", false);
-
         }
-        var calPos = stormeHander.transform.position;
-        calPos.z = Mathf.Clamp(calPos.z, storme_Pos_Left.position.z, storme_Pos_right.position.z);
-        stormeHander.transform.position = calPos;
-
-        if (!isMoveLeft)
+        var calPos = storme.transform.position;
+        calPos.z = Mathf.Clamp(calPos.z, -6.24f, -2.2f);
+        storme.transform.position = calPos;
+        if(storme.transform.position.z <= -6.15f)
         {
-            currentDist = Vector3.Distance(stormeHander.transform.position, storme_Pos_Left.position);
-            if (Vector3.Distance(stormeHander.transform.position, storme_Pos_Left.position) <= maxDistToTrigger)
-            {
-                onPosition = true;
-            }
-            else
-            {
-                onPosition = false;
-            }
+            isMovedToRight = true;
+
         }
         else
         {
-            currentDist = Vector3.Distance(stormeHander.transform.position, storme_Pos_right.position);
-            if (Vector3.Distance(stormeHander.transform.position, storme_Pos_right.position) <= maxDistToTrigger)
-            {
-                onPosition = true;
-            }
-            else
-            {
-                onPosition = false;
-            }
+            isMovedToRight = false;
         }
+
+        if(storme.transform.position.z >= -2.6f)
+        {
+            isMovedToLeft = true;
+        }
+        else
+        {
+            isMovedToLeft = false;
+        }
+
+       
     }
 
 
@@ -182,21 +181,30 @@ public class BarSceneView : MonoBehaviour
         yield return new WaitForSeconds(3f);
         stormeHander.DoMoveToThisPos(storme_Pos_List[2], 5f);
         yield return new WaitForSeconds(2f);
-        policeBot_2.DoMoveToThisPos(police_2_posList[3], 5f);
-        yield return new WaitForSeconds(6.5f);
+
+        policeBot_2.anim.GetComponent<SpriteRenderer>().sortingOrder = 2;
+        policeBot_2.DoMoveToThisPos(police_2_posList[3], 3f);
+        yield return new WaitForSeconds(3f);
+        policeBot_2.DoMoveToThisPos(police_2_posList[4], 2.5f);
+        yield return new WaitForSeconds(3.5f);
 
         { // jitter
-            Vector3 currentPos = stormeHander.transform.position;
-            currentPos.z = -5.14f;
-            stormeHander.DoMoveToThisPos(currentPos, 1f);            
-            yield return new WaitForSeconds(1.3f);
-            currentPos.z = -3.59f;
-            stormeHander.DoMoveToThisPos(currentPos, 1.5f);
-            yield return new WaitForSeconds(1.65f);
-            currentPos.z = -5.71f;
-            stormeHander.DoMoveToThisPos(currentPos, 2.5f);
-            yield return new WaitForSeconds(2.5f);
-            //policeBot_2.ChangeDirection(true);
+
+            /* Vector3 currentPos = stormeHander.transform.position;
+             currentPos.z = -5.14f;
+             stormeHander.DoMoveToThisPos(currentPos, 1f);            
+             yield return new WaitForSeconds(1.3f);
+             currentPos.z = -3.59f;
+             stormeHander.DoMoveToThisPos(currentPos, 1.5f);
+             yield return new WaitForSeconds(1.65f);
+             currentPos.z = -5.71f;
+             stormeHander.DoMoveToThisPos(currentPos, 2.5f);
+             yield return new WaitForSeconds(2.5f);*/
+            isTakeInput = true;
+            yield return new WaitUntil(()=> isMovedToRight);
+            isTakeInput = false;
+            stormeHander.anim.SetBool("run", false);
+            yield return new WaitForSeconds(0.3f);
             policeBot_2.transform.GetChild(0).transform.localRotation = Quaternion.Euler(0, 0, 0);
             policeBot_2.anim.SetTrigger("push");
             yield return new WaitForSeconds(0.2f);
@@ -209,12 +217,19 @@ public class BarSceneView : MonoBehaviour
 
             Debug.Log("Segment 1 done");
 
-            currentPos.z = -3.61f;
-            stormeHander.DoMoveToThisPos(currentPos, 2.5f);
-            yield return new WaitForSeconds(2.8f);
-            currentPos.z = -3f;
-            stormeHander.DoMoveToThisPos(currentPos, 0.7f);
-            yield return new WaitForSeconds(1.3f);
+            /* currentPos.z = -3.61f;
+             stormeHander.DoMoveToThisPos(currentPos, 2.5f);
+             yield return new WaitForSeconds(2.8f);
+             currentPos.z = -3f;
+             stormeHander.DoMoveToThisPos(currentPos, 0.7f);
+             yield return new WaitForSeconds(1.3f);*/
+
+            isTakeInput = true;
+            yield return new WaitUntil(() => isMovedToLeft);
+            isTakeInput = false;
+            stormeHander.anim.SetBool("run", false);
+            yield return new WaitForSeconds(0.3f);
+
             policeBot_1.anim.SetTrigger("push");
             yield return new WaitForSeconds(0.22f);
             stormeHander.anim.SetTrigger("trigger");
@@ -224,9 +239,13 @@ public class BarSceneView : MonoBehaviour
             yield return new WaitForSeconds(5f);
             Debug.Log("Segment 2 done");
 
-            currentPos.z = -5.71f;
-            stormeHander.DoMoveToThisPos(currentPos, 4f);
-            yield return new WaitForSeconds(4f);
+            isTakeInput = true;
+            yield return new WaitUntil(() => isMovedToRight);
+            isTakeInput = false;
+            stormeHander.anim.SetBool("run", false);
+            yield return new WaitForSeconds(0.3f);
+
+           
             policeBot_2.anim.SetTrigger("push");
             yield return new WaitForSeconds(0.22f);
             stormeHander.anim.SetTrigger("trigger");
@@ -240,7 +259,7 @@ public class BarSceneView : MonoBehaviour
             UIController.Instance.ShowLoadingAnimation(5);
         }
 
-        Controller.self.sequenceController.StartThisScene(Sequence.street_seq);
+        Controller.self.sequenceController.StartThisScene(Sequence.character_selection);
 
   
     }
