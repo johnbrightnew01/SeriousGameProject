@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Credits : MonoBehaviour
 {
+    [SerializeField] private IntroSceneView intro;
     [SerializeField] private GameObject creditObj;
     [SerializeField] private Transform startPos;
     [SerializeField] private Transform endPos;
@@ -14,14 +15,24 @@ public class Credits : MonoBehaviour
     private void OnEnable()
     {
         creditObj.transform.position = startPos.position;
+        intro.DoToggleFadeOutAudio(false);
+        SoundManager.Instance.PlaySound(SoundManager.Instance.creditSound);
         DoMove();
+
+    }
+
+    private void OnDisable()
+    {
+        intro.DoToggleFadeOutAudio(true);
+        creditObj.transform.DOKill();
+        SoundManager.Instance.StopThisSound(SoundManager.Instance.creditSound);
     }
 
     private void DoMove()
     {
         creditObj.transform.DOMove(endPos.position, moveTime).SetEase(Ease.Linear).OnComplete(() =>
         {
-            OnMoveDone();
+           // OnMoveDone();
         });
     }
 

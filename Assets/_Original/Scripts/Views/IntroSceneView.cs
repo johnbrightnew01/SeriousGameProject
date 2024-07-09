@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.Video;
@@ -43,6 +44,7 @@ public class IntroSceneView : MonoBehaviour
     public void OnStartTheScene()
     {
         introVideo.Play();
+        introVideo.isLooping = true;
         Invoke("OnEndTheScene",(float) 89.5f);
         Invoke("DoFadeWithBgSound", 87.2f);
 
@@ -81,5 +83,31 @@ public class IntroSceneView : MonoBehaviour
         grid.gameObject.SetActive(true);
     }
 
+    public void DoToggleFadeOutAudio(bool isPlay)
+    {
+
+        if (isPlay)
+        {
+            StartCoroutine(DoFade(1f, 0));
+        }
+        else
+        {
+            StartCoroutine(DoFade(0, 1f));
+        }
+    }
+    
+    IEnumerator DoFade(float target, float startFrom)
+    {
+        float timeELaps = 0;
+        float vol = startFrom;
+        while (0.5f > timeELaps)
+        {
+            timeELaps += Time.deltaTime;
+            vol = Mathf.Lerp(startFrom, target, timeELaps / 0.5f);
+            introVideo.SetDirectAudioVolume(0, vol);
+            yield return null;
+
+        }
+    }
 
 }

@@ -19,6 +19,7 @@ public class SoundManager : MonoBehaviour
 
     public AudioSource outroSound;
     public AudioSource interactiveSoundBackground;
+    public AudioSource creditSound;
 
 
     private void Awake()
