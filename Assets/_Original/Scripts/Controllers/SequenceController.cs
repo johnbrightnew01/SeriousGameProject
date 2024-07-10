@@ -25,6 +25,8 @@ public class SequenceController : MonoBehaviour
     public OutroSceneView outroScene;
     [SerializeField] private bool isOverrideSequence = true;
 
+    public static bool isStartFromFight = false;
+
 
     private void Awake()
     {
@@ -38,14 +40,28 @@ public class SequenceController : MonoBehaviour
 
     private void Start()
     {
+        if (isStartFromFight)
+        {
+            isStartFromFight = false;
+            StartThisScene(Sequence.street_seq);
+            return;
+        }
+
         if (isOverrideSequence)
         {
             StartThisScene(currentSequence);
         }
         else
         {
-            StartThisScene(GetTheSequenceEnum(PlayerPrefs.GetInt(LastSequenceID)));
+            StartThisScene(Sequence.intro_seq);
+          //
         }
+    }
+
+    public void LoadLastSavedGame()
+    {
+        StartThisScene(GetTheSequenceEnum(PlayerPrefs.GetInt(LastSequenceID)));
+        Debug.Log("startLast ");
     }
 
     public void StartThisScene(Sequence scene)
@@ -58,7 +74,19 @@ public class SequenceController : MonoBehaviour
         outroScene.gameObject.SetActive((scene == Sequence.outro_seq) ? true : false);
         UpdateSequence(scene);
 
-        PlayerPrefs.SetInt(LastSequenceID, (int)scene);
+        if(scene != Sequence.intro_seq)
+        {
+            PlayerPrefs.SetInt(LastSequenceID, (int)scene);
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown("m"))
+        {
+            UIController.Instance.ShowLoadingAnimation(3f);
+            StartThisScene(Sequence.outro_seq);
+        }
     }
 
     public void UpdateSequence(Sequence setTo)

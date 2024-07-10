@@ -47,7 +47,6 @@ public class HealthHandler : MonoBehaviour
         DoPlayGotHitSound();
         if (remainHp <= 0)
         {
-
             commonHandler.OnDead();
             if (hpUi != null)
             {
@@ -63,8 +62,7 @@ public class HealthHandler : MonoBehaviour
     }
 
     public void DoPlayGotHitSound()
-    {
-      
+    {      
         {
             if (commonHandler.isPlayer)
             {

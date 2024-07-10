@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 using UnityEngine.Video;
 
 public class IntroSceneView : MonoBehaviour
@@ -17,7 +18,8 @@ public class IntroSceneView : MonoBehaviour
     [SerializeField] private Transform theButtonPanel;
     [SerializeField] private Transform grid;
     [SerializeField] private GameObject animatedPage;
-
+    [SerializeField] private TextMeshProUGUI loadButtonText;
+    [SerializeField] private Color disableButtonColor;
 
     private void OnEnable()
     {
@@ -30,12 +32,17 @@ public class IntroSceneView : MonoBehaviour
         angryPixelLogo.gameObject.SetActive(false);
         theButtonPanel.gameObject.SetActive(false);
         OnStartTheScene();
-     
+        
+        if(PlayerPrefs.GetInt(SequenceController.LastSequenceID) == 0)
+        {           
+            loadButtonText.color = disableButtonColor;
+        }
     }
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Space))
+        
+        if (Input.GetKey("l"))
         {
             CancelInvoke();
             Invoke("OnEndTheScene",0.01f);
@@ -50,11 +57,20 @@ public class IntroSceneView : MonoBehaviour
 
     }
 
+    public void LoadTheGame()
+    {
+        if (PlayerPrefs.GetInt(SequenceController.LastSequenceID) != 0)
+        {
+            Controller.self.sequenceController.LoadLastSavedGame();
+        }
+    }
+
     public void ShowTheMenu()
     {
         CancelInvoke("OnEndTheScene");
         CancelInvoke("DoFadeWithBgSound");
         canvas.gameObject.SetActive(true);
+        Invoke("OnEndTheScene", 0.01f);
     }
 
     private void DoFadeWithBgSound() 

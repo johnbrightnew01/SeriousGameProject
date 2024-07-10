@@ -105,7 +105,14 @@ public class AttackHandler : MonoBehaviour
     public void DoReduceOthersHP()
     {
         if (currentTarget == null) return;
-      //  DoPlayPunchSound();
+        //  DoPlayPunchSound();
+        if (!commonHandler.isPlayer)
+        {
+            if(Vector3.Distance(this.transform.position, currentTarget.transform.position) > 1.7f)
+            {
+                return;
+            }
+        }
         currentTarget._healthHandler.ReduceHealth(hitDamage, commonHandler);
         currentTarget = null;
     }

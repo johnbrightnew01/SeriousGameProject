@@ -139,7 +139,7 @@ public class CommonHandler : MonoBehaviour
         {
             Controller.self.playerController.GetReadyForWave(true);
         }
-        Debug.Log("TargetF currentP 1 " + " targ from Pos " + playerFromPos);
+      //  Debug.Log("TargetF currentP 1 " + " targ from Pos " + playerFromPos);
 
     }
 
@@ -151,13 +151,13 @@ public class CommonHandler : MonoBehaviour
             if (cntre >= transform.position.z)
             {
                 DoMove(PlayerDirection.left, true);
-                Debug.Log("TargetF currentP 2 " + transform.position.z);
+              //  Debug.Log("TargetF currentP 2 " + transform.position.z);
 
             }
             else
             {
                 Controller.self.playerController.GetReadyForWave(false);
-                Debug.Log("TargetF currentP 3 " + transform.position.z + " targ3t " + targetFromPos);
+              //  Debug.Log("TargetF currentP 3 " + transform.position.z + " targ3t " + targetFromPos);
                 playerFromPos = targetFromPos;
                 playerToPos = targetToPos;
             }
@@ -254,6 +254,7 @@ public class CommonHandler : MonoBehaviour
         if (isDead) return;
         anim.SetBool(_runHash, false);
         anim.SetBool(_attackHash, true);
+
     }
 
 
@@ -264,6 +265,7 @@ public class CommonHandler : MonoBehaviour
         // do effects
         if (!isPlayer)
         {
+            SoundManager.Instance.PlaySound(SoundManager.Instance.policeDefeatSound);
             var plc = GetComponent<EnemyView>();
             var col = GetComponent<Collider>();
             col.enabled = false;
@@ -280,6 +282,7 @@ public class CommonHandler : MonoBehaviour
         if (isThisEnemyBoss)
         {
             Controller.self.playerController.isEnemyBossDead = true;
+            SoundManager.Instance.PlaySound(SoundManager.Instance.policeDefeatSound);
         }
 
     }

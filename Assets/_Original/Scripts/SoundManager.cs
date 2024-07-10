@@ -23,7 +23,7 @@ public class SoundManager : MonoBehaviour
     public AudioSource creditSound;
     public AudioSource characterSelection;
     public AudioSource barBGMusic;
-
+    public AudioSource policeDefeatSound;
 
 
     private void Awake()

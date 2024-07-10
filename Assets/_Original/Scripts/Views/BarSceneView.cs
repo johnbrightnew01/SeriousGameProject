@@ -93,13 +93,13 @@ public class BarSceneView : MonoBehaviour
            
             return;
         }
-        if (Input.GetKey("a"))
+        if (Input.GetKey("a") || Input.GetKey(KeyCode.LeftArrow))
         {
             stormeHander.gameObject.transform.Translate(Vector3.forward * 1.5f * Time.deltaTime);
             stormeHander.transform.GetChild(0).transform.rotation = Quaternion.Euler(0, 0f, 0);
             stormeHander.anim.SetBool("run", true);
         }
-        else if (Input.GetKey("d"))
+        else if (Input.GetKey("d") || Input.GetKey(KeyCode.RightArrow))
         {
             stormeHander.gameObject.transform.Translate(Vector3.forward * -1.5f * Time.deltaTime);
             stormeHander.transform.GetChild(0).transform.rotation = Quaternion.Euler(0, 180, 0);
@@ -245,7 +245,7 @@ public class BarSceneView : MonoBehaviour
             policeBot_1.ShowSpeech(1,4);
             yield return new WaitForSeconds(2.5f);
             stormeHander.ShowSpeech(2,1.5f); //NO
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(2f);
             Debug.Log("Segment 2 done");
 
             isTakeInput = true;

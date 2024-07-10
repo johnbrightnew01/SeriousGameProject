@@ -29,7 +29,8 @@ public class InteractiveIntroSceneView : MonoBehaviour
 
     private void OnDisable()
     {
-        UIController.Instance.ToggleInteractiveIntroUI(false);        
+        UIController.Instance.ToggleInteractiveIntroUI(false);
+        SoundManager.Instance.StopThisSound(SoundManager.Instance.interactiveSoundBackground);
     }
 
 

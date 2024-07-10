@@ -19,23 +19,23 @@ public class InputController : MonoBehaviour
         if (Controller.self.sequenceController.currentSequence != Sequence.street_seq) return;
         if (!isTakeInput) return;
         isMoving = false;
-        if (Input.GetKey("a"))
+        if (Input.GetKey("a") || Input.GetKey(KeyCode.LeftArrow))
         {
             isMoving = true;
             Controller.self.playerController._playerCommonHandler.DoMove(PlayerDirection.left);
         }
-        if (Input.GetKey("d"))
+        if (Input.GetKey("d") || Input.GetKey(KeyCode.RightArrow))
         {
             Controller.self.playerController._playerCommonHandler.DoMove(PlayerDirection.right);
             isMoving = true;
         }
 
-        if (Input.GetKey("w"))
+        if (Input.GetKey("w") || Input.GetKey(KeyCode.UpArrow))
         {
             isMoving = true;
             Controller.self.playerController._playerCommonHandler.DoMove(PlayerDirection.up);
         }
-        if (Input.GetKey("s"))
+        if (Input.GetKey("s") || Input.GetKey(KeyCode.DownArrow))
         {
             isMoving = true;
             Controller.self.playerController._playerCommonHandler.DoMove(PlayerDirection.down);

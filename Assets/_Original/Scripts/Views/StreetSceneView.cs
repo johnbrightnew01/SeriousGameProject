@@ -13,8 +13,10 @@ public class StreetSceneView : MonoBehaviour
     [SerializeField] private List<CharacterData> otherCharDataList;
     [SerializeField] private List<Transform> playerPosList;
     [SerializeField] private bool isJumpToFightScene;
+    [SerializeField] private GameObject tutorialPage;
     private void OnEnable()
     {
+        tutorialPage.gameObject.SetActive(false);
         Controller.self.cameraController.DoActiveVirtualCamera(Controller.self.cameraController.outsideCamera, false);
         if (!isJumpToFightScene)
         {
@@ -81,12 +83,20 @@ public class StreetSceneView : MonoBehaviour
         player.GetComponent<PlayerView>().playerPopUpCanvas.gameObject.SetActive(true);
         yield return new WaitForSeconds(3f);
         stormeAndPolic.gameObject.SetActive(false);
-        UIController.Instance.ShowLoadingAnimation(1f);
+        UIController.Instance.ShowLoadingAnimation(0.7f);
+
+
+        tutorialPage.gameObject.SetActive(true);
+        yield return new WaitUntil(() => tutorialPage.gameObject.activeSelf == false);
         Controller.self.cameraController.DoActiveVirtualCamera(Controller.self.cameraController.fightCamera, false);
+        UIController.Instance.ShowLoadingAnimation(2f);
+
         yield return new WaitForSeconds(0.5f);
 
+       
+
         Controller.self.inputController.EnableInput();
-          Controller.self.playerController.StartSpawningEnemy();
+        Controller.self.playerController.StartSpawningEnemy();
         UIGamePlay.Instance.TogglePlayerHpPanel(true);
 
     }
