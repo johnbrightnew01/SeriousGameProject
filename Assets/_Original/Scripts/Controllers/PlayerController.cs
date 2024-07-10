@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
     [field: ReadOnly, SerializeField] public bool isGettingReadyForWave { get; private set; } = false;
     [SerializeField, ReadOnly] public bool isEnemyBossDead = false;
 
-
+    public List<Wave> BackUpWavelist;
     private void Awake()
     {
         onStartSpawningEnemy = false;

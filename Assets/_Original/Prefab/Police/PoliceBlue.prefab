@@ -266,7 +266,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.91, z: 0.128}
-  m_LocalScale: {x: 0.7628316, y: 0.7628316, z: 0.7628316}
+  m_LocalScale: {x: 0.693988, y: 0.693988, z: 0.693988}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8642230594351502189}
@@ -518,6 +518,18 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 3528857726056621697, guid: 65718c5c93cac254f8b2889c1b24ac79,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a1ded0fb6a835c34ea24b0e4f5fd0560,
+        type: 3}
+    - target: {fileID: 3976221850021100324, guid: 65718c5c93cac254f8b2889c1b24ac79,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 34bc8820077e2ee44b068ac25561bf20,
+        type: 3}
     - target: {fileID: 7271995370225861974, guid: 65718c5c93cac254f8b2889c1b24ac79,
         type: 3}
       propertyPath: m_Pivot.x

@@ -38,6 +38,18 @@ public class OutroSceneView : MonoBehaviour
         room1Door.gameObject.SetActive(false);
         interactiveMouse.gameObject.SetActive(false);
         SoundManager.Instance.streetSong.Stop();
+        Invoke("PlayOutroSound", 2f);
+        
+    }
+    private void OnDisable()
+    {
+        SoundManager.Instance.StopThisSound(SoundManager.Instance.outroSound);
+        CancelInvoke("PlayOutroSound");
+    }
+
+    public void PlayOutroSound() // call from invoke
+    {
+        SoundManager.Instance.PlaySound(SoundManager.Instance.outroSound);
     }
 
     private void Update()
@@ -46,10 +58,23 @@ public class OutroSceneView : MonoBehaviour
         mouseCursor.transform.position = new Vector3(pointerPos.x, pointerPos.y, 0);
     }
 
-    
+    public void OnPointerEnterDirection(bool isLeft)
+    {
+        interactiveMouse.gameObject.SetActive(true);
+        normalMouse.gameObject.SetActive(false);
+        if (isLeft)
+        {
+            interactiveMouse.gameObject.transform.localRotation = Quaternion.Euler(0, 0, 90f);
+        }
+        else
+        {
+            interactiveMouse.gameObject.transform.localRotation = Quaternion.Euler(0, 0,- 90f);
+        }
+    }
 
     public void OnPointerEnter()
     {
+        interactiveMouse.gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
         interactiveMouse.gameObject.SetActive(true);
         normalMouse.gameObject.SetActive(false);
         Debug.Log("Mouse Enter");
@@ -80,7 +105,7 @@ public class OutroSceneView : MonoBehaviour
     {
         room0.gameObject.SetActive(false);
         room1.gameObject.SetActive(true);
-        SoundManager.Instance.PlaySound(SoundManager.Instance.outroSound);
+     
     }
     
     public void OpenRoom3()
@@ -132,6 +157,10 @@ public class OutroSceneView : MonoBehaviour
 
     }   
 
+    public void ExitToMainMenu()
+    {
+        Controller.self.sequenceController.GoToMenuScene();
+    }
 
 
     public void Room2PosterPage_OnMouseClick()
@@ -150,6 +179,16 @@ public class OutroSceneView : MonoBehaviour
 
     public void ReturnToRoom2()
     {
+       // Debug.Log("returnToRoom 2");
+        room0.gameObject.SetActive(false);
+        room1.gameObject.SetActive(false);
+        room3.gameObject.SetActive(false);
+        room2.gameObject.SetActive(true);
+
+        room3TriggerHolder.gameObject.SetActive(false);
+        room2TriggerHolder.SetActive(true);
+
+
         room2_Video_page.gameObject.SetActive(false);
         room2_Info_page.gameObject.SetActive(false);
         room2_Info2_page.gameObject.SetActive(false);

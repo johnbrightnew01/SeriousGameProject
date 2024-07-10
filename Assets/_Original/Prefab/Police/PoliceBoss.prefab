@@ -397,6 +397,23 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 3528857726056621697, guid: 65718c5c93cac254f8b2889c1b24ac79,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8f298d6763286824583438c98b290ebd,
+        type: 3}
+    - target: {fileID: 3976221850021100324, guid: 65718c5c93cac254f8b2889c1b24ac79,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 74b9f7d5c3a5dc842b2c6f5ba33a5342,
+        type: 3}
+    - target: {fileID: 5875582394172937696, guid: 65718c5c93cac254f8b2889c1b24ac79,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 104.9452
+      objectReference: {fileID: 0}
     - target: {fileID: 7271995370225861974, guid: 65718c5c93cac254f8b2889c1b24ac79,
         type: 3}
       propertyPath: m_Pivot.x

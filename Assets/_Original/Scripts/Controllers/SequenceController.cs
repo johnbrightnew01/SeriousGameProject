@@ -25,6 +25,7 @@ public class SequenceController : MonoBehaviour
     public OutroSceneView outroScene;
     [SerializeField] private bool isOverrideSequence = true;
 
+
     private void Awake()
     {
         if (!PlayerPrefs.HasKey(LastSequenceID))
@@ -64,6 +65,13 @@ public class SequenceController : MonoBehaviour
     {
         currentSequence = setTo;
         
+    }
+
+    public void GoToMenuScene()
+    {
+        StartThisScene(Sequence.intro_seq);
+        Controller.self.sequenceController.introScene.ShowTheMenu();
+
     }
 
 

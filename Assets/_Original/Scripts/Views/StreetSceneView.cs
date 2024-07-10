@@ -34,27 +34,26 @@ public class StreetSceneView : MonoBehaviour
         yield return new WaitForSeconds(3f);
 
         otherCharDataList[2].speechList[0].gameObject.SetActive(true);
-        yield return new WaitForSeconds(4.5f);
+        yield return new WaitForSeconds(4f);
 
         otherCharDataList[3].speechList[0].gameObject.SetActive(true);
-        yield return new WaitForSeconds(4.5f);
+        yield return new WaitForSeconds(4f);
 
         otherCharDataList[4].speechList[0].gameObject.SetActive(true);
-        yield return new WaitForSeconds(4.5f);
+        yield return new WaitForSeconds(3.5f);
 
         otherCharDataList[5].speechList[0].gameObject.SetActive(true);
-        yield return new WaitForSeconds(4.5f);
+        yield return new WaitForSeconds(4f);
 
         otherCharDataList[6].speechList[0].gameObject.SetActive(true);
-        yield return new WaitForSeconds(4.5f);
+        yield return new WaitForSeconds(4f);
 
         otherCharDataList[7].speechList[0].gameObject.SetActive(true);
-        yield return new WaitForSeconds(4.5f);
+        yield return new WaitForSeconds(4f);
     }
 
     IEnumerator OnStartSegment()
-    {
-        
+    {        
         yield return null;
         player.transform.position = playerPosList[0].position;
         UIController.Instance.ShowLoadingAnimation(5f, 4f);
@@ -62,13 +61,13 @@ public class StreetSceneView : MonoBehaviour
         SoundManager.Instance.DoPlayBGSound(SoundManager.Instance.streetSong, true, true);
         outsideCam.transform.position = cameraMovePosList[0].position;
         stormeAndPolic.transform.position = stromePosList[0].position;
-        yield return new WaitForSeconds(8.5f);
+        yield return new WaitForSeconds(8f);
         otherCharDataList[0].speechList[0].gameObject.SetActive(true);
        // yield return new WaitForSeconds(0.5f);
         StartCoroutine(OtherCharSPeech());
         yield return new WaitForSeconds(5f);
-        outsideCam.transform.DOMove(cameraMovePosList[1].position, 25f).SetEase(Ease.Linear);
-        yield return new WaitForSeconds(25f);
+        outsideCam.transform.DOMove(cameraMovePosList[1].position, 20f).SetEase(Ease.Linear); //25
+        yield return new WaitForSeconds(20f);
         outsideCam.transform.DOMove(cameraMovePosList[2].position, 5f).SetEase(Ease.Linear);
         
         var cmnView = player.GetComponent<CommonHandler>();

@@ -38,6 +38,7 @@ public class UIGamePlay : MonoBehaviour
 
     public void ShowWaveText(int waveNum, float showTime)
     {
+        return;
         if(waveNum == 4)
         {
             waveText.text = "BOSS";

@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 [DefaultExecutionOrder(-99)]
 public class SoundManager : MonoBehaviour
@@ -20,6 +21,9 @@ public class SoundManager : MonoBehaviour
     public AudioSource outroSound;
     public AudioSource interactiveSoundBackground;
     public AudioSource creditSound;
+    public AudioSource characterSelection;
+    public AudioSource barBGMusic;
+
 
 
     private void Awake()
@@ -48,6 +52,10 @@ public class SoundManager : MonoBehaviour
 
     public void DoPlayBGSound(AudioSource src, bool isPlay = true, bool isFadein = false)
     {
+        if(src == streetSong)
+        {
+            src.DOKill();
+        }
         if(src != null)
         {
             if (isFadein)
@@ -57,6 +65,7 @@ public class SoundManager : MonoBehaviour
                     src.volume = 0f;
                     src.Play();                  
                     src.DOFade(1f, 1f);
+                    src.pitch = 1f;
                 }
                 else
                 {
@@ -132,5 +141,17 @@ public class SoundManager : MonoBehaviour
     {
         src.Stop();
     }
+
+
+    public void DoWinPitch(float pitchTime = 15f)
+    {
+        streetSong.DOPitch(1.3f, pitchTime).SetEase(Ease.Linear);
+    }
+
+    public void DoLoosePitch(float pitchTime = 20f)
+    {
+        streetSong.DOPitch(0, pitchTime).SetEase(Ease.Linear);
+    }
+
 
 }

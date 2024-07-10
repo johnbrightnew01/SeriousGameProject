@@ -33,6 +33,12 @@ public class CharacterSelectionSceneView : MonoBehaviour
         char_2Icon.color = (isLockedChar_2 ? nonSelectedCharColor : Color.white);
         char_3Icon.color = (isLockedChar_3 ? nonSelectedCharColor : Color.white);
         SelectChar_1();
+        SoundManager.Instance.PlaySound(SoundManager.Instance.characterSelection);
+    }
+
+    private void OnDisable()
+    {
+        SoundManager.Instance.StopThisSound(SoundManager.Instance.characterSelection);
     }
 
     public void SelectChar_1() // call from Ui

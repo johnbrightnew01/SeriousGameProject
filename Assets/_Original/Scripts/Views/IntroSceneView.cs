@@ -49,12 +49,24 @@ public class IntroSceneView : MonoBehaviour
         Invoke("DoFadeWithBgSound", 87.2f);
 
     }
+
+    public void ShowTheMenu()
+    {
+        CancelInvoke("OnEndTheScene");
+        CancelInvoke("DoFadeWithBgSound");
+        canvas.gameObject.SetActive(true);
+    }
+
     private void DoFadeWithBgSound() 
     {
         SoundManager.Instance.DoPlayBG();
     }
 
-
+    private void OnDisable()
+    {
+        CancelInvoke("OnEndTheScene");
+        CancelInvoke("DoFadeWithBgSound");
+    }
 
     private void OnEndTheScene()
     {

@@ -27,15 +27,24 @@ public class UIGameOver : MonoBehaviour
 
     private void ShowWinPanel()
     {
+        SoundManager.Instance.DoWinPitch();
         winPanel.SetActive(true);
         loosePanel.SetActive(false);
-        StartCoroutine(ShowTheOutro());
+     
     }
 
     private void ShowLoosePanel()
     {
+        SoundManager.Instance.DoLoosePitch();
         loosePanel.SetActive(true);
         winPanel.SetActive(false);
+    }
+
+    public void GoToMeuseum()
+    {
+        UIController.Instance.ShowLoadingAnimation(4f);
+        Controller.self.sequenceController.StartThisScene(Sequence.outro_seq);
+        this.gameObject.SetActive(false);
     }
 
     IEnumerator ShowTheOutro()
@@ -46,7 +55,7 @@ public class UIGameOver : MonoBehaviour
 
     public void TryAgain() // call from ui
     {
-        Controller.self.sequenceController.StartThisScene(Sequence.street_seq);
+      //  Controller.self.sequenceController.StartThisScene(Sequence.street_seq);
         SceneManager.LoadScene(0);
     }
 }
