@@ -7519,7 +7519,7 @@ Transform:
   m_GameObject: {fileID: 315986665}
   serializedVersion: 2
   m_LocalRotation: {x: 0.048094098, y: 0.7054693, z: -0.048094098, w: 0.7054693}
-  m_LocalPosition: {x: -13.277478, y: 5.1071563, z: 7.447719}
+  m_LocalPosition: {x: -13.277478, y: 5.1071563, z: 14.224831}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7564,7 +7564,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 10
+  m_Priority: 100
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 2107570236}
   m_Follow: {fileID: 2107570236}
@@ -7913,8 +7913,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -10.23, y: 3.2, z: -1.03}
+  m_LocalRotation: {x: 0.048094098, y: 0.7054693, z: -0.048094098, w: 0.7054693}
+  m_LocalPosition: {x: -13.277478, y: 5.1071563, z: 14.224831}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -29486,16 +29486,100 @@ MonoBehaviour:
   waveList:
   - policeSpawnSequence:
     - policeSpawnList:
-      - {fileID: 6709061921269502580, guid: 9ba80f4730d6b7e459abdad1009c4f53, type: 3}
       - {fileID: 6709061921269502580, guid: 6c33d8a8a94244244bc22841947a472e, type: 3}
+      - {fileID: 6709061921269502580, guid: 6c33d8a8a94244244bc22841947a472e, type: 3}
+      - {fileID: 6709061921269502580, guid: 6c33d8a8a94244244bc22841947a472e, type: 3}
+      - {fileID: 6709061921269502580, guid: fcbcff2186bd6fd4aaca2198eedcca5c, type: 3}
+      - {fileID: 6709061921269502580, guid: fcbcff2186bd6fd4aaca2198eedcca5c, type: 3}
       policeSpawnPosList:
-      - {fileID: 680816134}
-      - {fileID: 1069098764}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
       spawnDelay:
       - 1
       - 7
+      - 5
+      - 6
+      - 5
     zStartPos: -24
-    zEndPos: -9.8
+    zEndPos: -12
+  - policeSpawnSequence:
+    - policeSpawnList:
+      - {fileID: 6709061921269502580, guid: fcbcff2186bd6fd4aaca2198eedcca5c, type: 3}
+      - {fileID: 6709061921269502580, guid: fcbcff2186bd6fd4aaca2198eedcca5c, type: 3}
+      - {fileID: 6709061921269502580, guid: 183f0a79a9f15bb4891ee8432f363276, type: 3}
+      - {fileID: 6709061921269502580, guid: fcbcff2186bd6fd4aaca2198eedcca5c, type: 3}
+      - {fileID: 6709061921269502580, guid: 183f0a79a9f15bb4891ee8432f363276, type: 3}
+      - {fileID: 6709061921269502580, guid: 183f0a79a9f15bb4891ee8432f363276, type: 3}
+      - {fileID: 6709061921269502580, guid: eb68224144e6d7241a3942627ba1e9b8, type: 3}
+      policeSpawnPosList:
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      spawnDelay:
+      - 2
+      - 2
+      - 3
+      - 3
+      - 3
+      - 3
+      - 3
+    zStartPos: -11.5
+    zEndPos: 2.3
+  - policeSpawnSequence:
+    - policeSpawnList:
+      - {fileID: 6709061921269502580, guid: 183f0a79a9f15bb4891ee8432f363276, type: 3}
+      - {fileID: 6709061921269502580, guid: fcbcff2186bd6fd4aaca2198eedcca5c, type: 3}
+      - {fileID: 6709061921269502580, guid: 183f0a79a9f15bb4891ee8432f363276, type: 3}
+      - {fileID: 6709061921269502580, guid: fcbcff2186bd6fd4aaca2198eedcca5c, type: 3}
+      - {fileID: 6709061921269502580, guid: fcbcff2186bd6fd4aaca2198eedcca5c, type: 3}
+      - {fileID: 6709061921269502580, guid: eb68224144e6d7241a3942627ba1e9b8, type: 3}
+      - {fileID: 6709061921269502580, guid: eb68224144e6d7241a3942627ba1e9b8, type: 3}
+      policeSpawnPosList:
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      spawnDelay:
+      - 2
+      - 3
+      - 3
+      - 3
+      - 3
+      - 5
+      - 6
+    zStartPos: 3
+    zEndPos: 18
+  - policeSpawnSequence:
+    - policeSpawnList:
+      - {fileID: 6709061921269502580, guid: 9ba80f4730d6b7e459abdad1009c4f53, type: 3}
+      - {fileID: 6709061921269502580, guid: 183f0a79a9f15bb4891ee8432f363276, type: 3}
+      - {fileID: 6709061921269502580, guid: 6c33d8a8a94244244bc22841947a472e, type: 3}
+      - {fileID: 6709061921269502580, guid: 6c33d8a8a94244244bc22841947a472e, type: 3}
+      - {fileID: 6709061921269502580, guid: 6c33d8a8a94244244bc22841947a472e, type: 3}
+      policeSpawnPosList:
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+      spawnDelay:
+      - 2
+      - 7
+      - 5
+      - 1
+      - 8
+    zStartPos: 3
+    zEndPos: 18
   timeCounter: 0
   _playerView: {fileID: 0}
   orgPoliceList:
@@ -31123,7 +31207,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1293063476
 Transform:
   m_ObjectHideFlags: 0
@@ -45935,8 +46019,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1924291687}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.07120437, y: 0.6286647, z: -0.057966214, w: 0.7722374}
-  m_LocalPosition: {x: -7.74, y: 3.6599998, z: 5.83}
+  m_LocalRotation: {x: 0.07120438, y: 0.6286647, z: -0.057966217, w: 0.7722374}
+  m_LocalPosition: {x: -7.74, y: 3.6599998, z: 16.76}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -47951,7 +48035,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1982350945
 RectTransform:
   m_ObjectHideFlags: 0
@@ -50405,7 +50489,7 @@ Transform:
   m_GameObject: {fileID: 2107570234}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.37, y: 0.57, z: 7.77}
+  m_LocalPosition: {x: -2.37, y: 0.57, z: 18.7}
   m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -50557,7 +50641,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   commonHandler: {fileID: 0}
-  hitDamage: 2000
+  hitDamage: 180
   <isAttacking>k__BackingField: 0
   <currentTarget>k__BackingField: {fileID: 0}
   rayCastPos: {fileID: 574863490}
