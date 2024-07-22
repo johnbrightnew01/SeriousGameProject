@@ -42,7 +42,7 @@ public class SequenceController : MonoBehaviour
     {
         if (isStartFromFight)
         {
-            isStartFromFight = false;
+         //   isStartFromFight = false;
             StartThisScene(Sequence.street_seq);
             return;
         }
@@ -56,6 +56,14 @@ public class SequenceController : MonoBehaviour
             StartThisScene(Sequence.intro_seq);
           //
         }
+    }
+
+    public void TurnOffEverySequence()
+    {
+        SoundManager.Instance.StopAllSound();
+        StartThisScene(Sequence.none);
+     
+        
     }
 
     public void LoadLastSavedGame()

@@ -5,6 +5,7 @@ using UnityEngine;
 public class AnimationTrigger : MonoBehaviour
 {
     [SerializeField, ReadOnly] private CommonHandler commonH;
+    [SerializeField] private bool isPlayFootStepSound;
 
     private void Awake()
     {
@@ -19,6 +20,18 @@ public class AnimationTrigger : MonoBehaviour
     public void OnAttackHit()
     {
         commonH._attackHandler.DoReduceOthersHP();
+    }
+
+    public void FootStep()
+    {
+        if (!isPlayFootStepSound) return;
+        SoundManager.Instance.SpawnAndPlayNewSound(SoundManager.Instance.footStep);
+    }
+
+    public void StormyFootStep()
+    {
+        if (!isPlayFootStepSound) return;
+        SoundManager.Instance.SpawnAndPlayNewSound(SoundManager.Instance.footStepStormy);
     }
     
 }

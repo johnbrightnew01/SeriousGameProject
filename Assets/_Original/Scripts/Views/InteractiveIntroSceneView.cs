@@ -90,6 +90,7 @@ public class InteractiveIntroSceneView : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && isTextDone)
         {
             isMouseButtonClicked = true;
+            Controller.self.inputController.isTakingAnyInput = true;
         }
     }
 

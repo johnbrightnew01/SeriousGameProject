@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum SceneList
 {
@@ -15,10 +16,15 @@ public enum SceneList
 public class GameController : MonoBehaviour
 {
 
-
+    [SerializeField] private float maxWaitTimeToShowIdleVideo = 120f;
+    [SerializeField,ReadOnly]private float timeDeltaCounter = 0;
+    [SerializeField] private GameObject idleVideoPanel;
+    [field: SerializeField, ReadOnly] public bool isInIdleMode { get; private set; }
     private void Awake()
     {
+        idleVideoPanel.SetActive(false);
         OnInitial();
+        isInIdleMode = false;
     }
 
     public void OnInitial()
@@ -34,6 +40,60 @@ public class GameController : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
 
+    }
+
+    private void Update()
+    {
+        if (IsTakingAnyInput())
+        {
+            timeDeltaCounter = 0;
+            
+        }
+
+        if(timeDeltaCounter < maxWaitTimeToShowIdleVideo)
+        {
+            timeDeltaCounter += Time.deltaTime;
+        }
+        else
+        {
+            isInIdleMode = true;
+            ToggleIdelVideoPanel(true);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && isInIdleMode)
+        {
+            isInIdleMode = false;
+            ToggleIdelVideoPanel(false);
+            timeDeltaCounter = 0;
+            SceneManager.LoadScene(0);
+        }
+
+    }
+
+    private void ToggleIdelVideoPanel(bool isEnable)
+    {
+        idleVideoPanel.SetActive(isEnable);
+        if (isEnable)
+        {
+            Controller.self.sequenceController.TurnOffEverySequence();
+        }
+    }
+
+    private bool IsTakingAnyInput()
+    {
+        if(Controller.self.inputController.isTakingAnyInput)
+        {
+            Controller.self.inputController.isTakingAnyInput = false;
+            timeDeltaCounter = 0;
+            return true;
+        }
+        return false;
+    }
+
+    public void OnCancelVideoInput()
+    {
+        timeDeltaCounter = 0;
+        // close the video;
     }
 
 

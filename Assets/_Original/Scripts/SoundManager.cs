@@ -24,8 +24,10 @@ public class SoundManager : MonoBehaviour
     public AudioSource characterSelection;
     public AudioSource barBGMusic;
     public AudioSource policeDefeatSound;
+    public AudioSource footStep;
+    public AudioSource footStepStormy;
 
-
+  
     private void Awake()
     {
         if(Instance == null)
@@ -42,12 +44,34 @@ public class SoundManager : MonoBehaviour
         }
         else
         {
-            barSound.DOFade(0, 1f).OnComplete(() => { 
-            
+            barSound.DOFade(0, 1f).OnComplete(() => {             
             
                 barSound.Stop();
             });
         }
+    }
+
+    public void StopAllSound()
+    {
+        bgAudio.Stop();
+        thunderSound.Stop();
+        barSound.Stop();
+        streetSong.Stop();
+        silviaPunch.Stop();
+        silviaGotHit.Stop(); 
+        silviaBlock.Stop(); 
+        copPunch.Stop();
+        copGotHit.Stop();
+        copBlock.Stop(); 
+        outroSound.Stop();
+        interactiveSoundBackground.Stop(); 
+        creditSound.Stop();
+        characterSelection.Stop(); 
+        barBGMusic.Stop(); 
+        policeDefeatSound.Stop();
+        footStep.Stop();
+        footStepStormy.Stop();
+
     }
 
     public void DoPlayBGSound(AudioSource src, bool isPlay = true, bool isFadein = false)
@@ -72,8 +96,7 @@ public class SoundManager : MonoBehaviour
                     src.DOFade(0f, 1f).OnComplete(() => {
                         src.Stop();
                     });
-                }
-              
+                }              
             }
             else
             {
@@ -86,7 +109,6 @@ public class SoundManager : MonoBehaviour
                     src.Stop();
                 }
             }
-
         }
     }
 
@@ -116,6 +138,13 @@ public class SoundManager : MonoBehaviour
     {
     //   bgAudio.Play();
         PlaySound(bgAudio, 88.19f);
+    }
+
+    public void SpawnAndPlayNewSound(AudioSource src)
+    {
+        var snd = Instantiate(src);
+        snd.Play();
+        Destroy(snd.gameObject, 0.3f);
     }
 
     public void PlaySound(AudioSource audio, float startTime = 0f, float endTime = 0f, float volume = 1f, float pitch = 1f)

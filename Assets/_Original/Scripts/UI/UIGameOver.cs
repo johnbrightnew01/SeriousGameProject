@@ -55,8 +55,8 @@ public class UIGameOver : MonoBehaviour
 
     public void TryAgain() // call from ui
     {
-        //  Controller.self.sequenceController.StartThisScene(Sequence.street_seq);
         SequenceController.isStartFromFight = true;
-        SceneManager.LoadScene(0);
+        //  Controller.self.sequenceController.StartThisScene(Sequence.street_seq);
+       SceneManager.LoadScene(0);
     }
 }

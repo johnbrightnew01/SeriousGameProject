@@ -115,6 +115,7 @@ public class CommonHandler : MonoBehaviour
             if(dir < 0)
             {
                 var calP = this.transform.position.z + backForce;
+                calP = Mathf.Clamp(calP, playerFromPos, playerToPos);
                 this.transform.DOMoveZ(calP, 0.4f).OnComplete(() => {
                     isGettingForced = false;
                 });
@@ -122,6 +123,7 @@ public class CommonHandler : MonoBehaviour
             else
             {
                 var calP = this.transform.position.z - backForce;
+                calP = Mathf.Clamp(calP, playerFromPos, playerToPos);
                 this.transform.DOMoveZ(calP, 0.4f).OnComplete(() => {
                     isGettingForced = false;
                 });
@@ -164,10 +166,6 @@ public class CommonHandler : MonoBehaviour
         }
         
     }
-
-
-
-
 
     public void DoMove(PlayerDirection dir, bool isOverride = false)
     {
@@ -216,11 +214,8 @@ public class CommonHandler : MonoBehaviour
             UpdateAnimator(PlayerAnimationType.walk);
         }
 
-
-
         var pp = _playerRb.position;
         pp.y = Mathf.Clamp(pp.y, -0.59f, 0.84f);
-
 
         if (!isOverride)
         {
@@ -232,15 +227,10 @@ public class CommonHandler : MonoBehaviour
             {
                 playerFromPos = targetFromPos;
             }
-
-
             pp.z = Mathf.Clamp(pp.z, playerFromPos, playerToPos);
-        }
-
- 
+        } 
        
         _playerRb.position = pp;
-
     }
 
     public void ConfigMoveDistance()

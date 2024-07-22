@@ -18,12 +18,18 @@ public class StreetSceneView : MonoBehaviour
     {
         tutorialPage.gameObject.SetActive(false);
         Controller.self.cameraController.DoActiveVirtualCamera(Controller.self.cameraController.outsideCamera, false);
-        if (!isJumpToFightScene)
+        if (isJumpToFightScene)
+        {
+            StartCoroutine(DirectJumpToFight());
+            return;
+        }
+        if (!SequenceController.isStartFromFight )
         {
             StartCoroutine(OnStartSegment());
         }
         else
         {
+            SequenceController.isStartFromFight = false;
             StartCoroutine(DirectJumpToFight());
         }
     }
@@ -101,16 +107,41 @@ public class StreetSceneView : MonoBehaviour
 
     }
 
+
+
     IEnumerator DirectJumpToFight()
     {
+        outsideCam.transform.DOMove(cameraMovePosList[2].position, 0f).SetEase(Ease.Linear);
+        yield return null;
+        player.transform.position = playerPosList[0].position;
+        SoundManager.Instance.DoPlayBGSound(SoundManager.Instance.streetSong, true, true);
+
+        var cmnView = player.GetComponent<CommonHandler>();
+        yield return new WaitForSeconds(1f);
+        cmnView.BotControl(true);
+        player.transform.DOMove(playerPosList[1].position, 6f).SetEase(Ease.Linear).OnComplete(() =>
+        {
+            cmnView.BotControl(false);
+        });
+        yield return new WaitForSeconds(7.5f);
+        player.GetComponent<PlayerView>().playerPopUpCanvas.gameObject.SetActive(true);
+        yield return new WaitForSeconds(3f);
         stormeAndPolic.gameObject.SetActive(false);
-        player.transform.position = playerPosList[1].position;
+        UIController.Instance.ShowLoadingAnimation(0.7f);
+
+
+        tutorialPage.gameObject.SetActive(true);
+        yield return new WaitUntil(() => tutorialPage.gameObject.activeSelf == false);
         Controller.self.cameraController.DoActiveVirtualCamera(Controller.self.cameraController.fightCamera, false);
-        yield return new WaitForSeconds(0.45f);
+        UIController.Instance.ShowLoadingAnimation(2f);
+
+        yield return new WaitForSeconds(0.5f);
+
+
+
         Controller.self.inputController.EnableInput();
         Controller.self.playerController.StartSpawningEnemy();
         UIGamePlay.Instance.TogglePlayerHpPanel(true);
     }
-
 
 }

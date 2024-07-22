@@ -8,10 +8,12 @@ public class InputController : MonoBehaviour
     [SerializeField]
     private bool isTakeInput;
     private bool isMoving;
+    [SerializeField, ReadOnly] public bool isTakingAnyInput;
 
     private void Awake()
     {
         isTakeInput = false;
+        isTakingAnyInput = false;
     }
     void FixedUpdate()
     {
@@ -21,6 +23,7 @@ public class InputController : MonoBehaviour
         isMoving = false;
         if (Input.GetKey("a") || Input.GetKey(KeyCode.LeftArrow))
         {
+            isTakingAnyInput = true;
             isMoving = true;
             Controller.self.playerController._playerCommonHandler.DoMove(PlayerDirection.left);
         }
@@ -28,25 +31,30 @@ public class InputController : MonoBehaviour
         {
             Controller.self.playerController._playerCommonHandler.DoMove(PlayerDirection.right);
             isMoving = true;
+            isTakingAnyInput = true;
         }
 
         if (Input.GetKey("w") || Input.GetKey(KeyCode.UpArrow))
         {
             isMoving = true;
+            isTakingAnyInput = true;
             Controller.self.playerController._playerCommonHandler.DoMove(PlayerDirection.up);
         }
         if (Input.GetKey("s") || Input.GetKey(KeyCode.DownArrow))
         {
             isMoving = true;
+            isTakingAnyInput = true;
             Controller.self.playerController._playerCommonHandler.DoMove(PlayerDirection.down);
         }
         if (Input.GetKey("e"))
         {
             isMoving = false; ;
+            isTakingAnyInput = true;
             Controller.self.playerController._playerCommonHandler.DoBlockAttack();
         }
         if (Input.GetKeyUp("e"))
         {
+            isTakingAnyInput = true;
             Controller.self.playerController._playerCommonHandler.RemoveBlock();
         }
         if (!isMoving)
@@ -56,6 +64,7 @@ public class InputController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space))
         {
+            isTakingAnyInput = true;
             Controller.self.playerController._playerCommonHandler._attackHandler.Attack();
         }
 
